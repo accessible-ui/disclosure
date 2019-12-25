@@ -124,7 +124,7 @@ This component wraps any React element and turns it into a collapse target.
 //   class="alert"
 //   aria-collapse="false"
 //   id="collapse--12"
-//   style="visibility: hidden; position: fixed; margin: auto; left: 0px; right: 0px; top: 50%; transform: translateY(-50%); z-index: 1;"
+//   style="visibility: hidden;"
 // >
 //   Alert
 // </div>
