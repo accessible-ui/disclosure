@@ -49,6 +49,10 @@ import {Collapse, Target, Trigger, Close} from '@accessible/collapse'
 
 const Component = () => (
   <Collapse>
+    <Trigger>
+      <button>Open me</button>
+    </Trigger>
+
     <Target>
       <div className="my-collapse">
         <Close>
@@ -56,10 +60,6 @@ const Component = () => (
         </Close>
       </div>
     </Target>
-
-    <Trigger>
-      <button>Open me</button>
-    </Trigger>
   </Collapse>
 )
 ```
