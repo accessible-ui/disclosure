@@ -82,7 +82,7 @@ describe('<Target>', () => {
     expect(result.asFragment()).toMatchSnapshot('closed initially')
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.keyUp(result.getByText('Hello world'), {key: 'Escape', code: 27})
+    fireEvent.keyUp(result.getByText('Hello world'), {key: 'Escape', which: 27})
     expect(result.asFragment()).toMatchSnapshot('closed')
   })
 

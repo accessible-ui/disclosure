@@ -23,10 +23,10 @@
   dependencies:
     "@react-hook/passive-layout-effect" "^1.0.2"
 
-"@accessible/use-keycode@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@accessible/use-keycode/-/use-keycode-1.0.0.tgz#e0b63e1ae7050c3b05bfe9de6da1de431c95742c"
-  integrity sha512-in2BqzyTS1TVpN2lFZA1JTIQO8l2TmEJXa52mbgfN5JYRI3FQ55RU8EFLyzpjVv4UPzBdg2APW/4QTD2imFy4w==
+"@accessible/use-keycode@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@accessible/use-keycode/-/use-keycode-1.0.2.tgz#48c33e70d015fe2e3c8753a0433750b9e4ef6a26"
+  integrity sha512-lduCksS4x4AWZsG3XCcaAuEs9IkbJoWjDhA4wpzKXhnl2hMNdZnstdxHYnyu+nnq8V/dpuC9yopZ9uXaLoBUVQ==
   dependencies:
     "@react-hook/passive-layout-effect" "^1.0.2"
 
