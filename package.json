@@ -1,16 +1,28 @@
 {
   "name": "@accessible/collapse",
   "version": "1.0.0",
-  "homepage": "https://github.com/accessible-ui/accessible#readme",
-  "repository": "github:accessible-ui/accessible",
-  "bugs": "https://github.com/accessible-ui/accessible/issues",
-  "author": "Jared Lunde <jared@BeStellar.co> (https://jaredLunde.com)",
+  "homepage": "https://github.com/accessible-ui/collapse#readme",
+  "repository": "github:accessible-ui/collapse",
+  "bugs": "https://github.com/accessible-ui/collapse/issues",
+  "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
-  "description": "",
+  "description": "An accessible and versatile collapse component for React",
   "keywords": [
     "react",
     "react component",
-    "collapse"
+    "collapse",
+    "accessible collapse",
+    "a11y collapse",
+    "react a11y collapse",
+    "react accessible collapse",
+    "react collapse",
+    "react collapse component",
+    "react collapsible",
+    "react collapsible component",
+    "a11y",
+    "react aria collapse",
+    "aria",
+    "aria collapse"
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -74,7 +86,16 @@
     "ts-jest": "latest",
     "typescript": "latest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@accessible/use-conditional-focus": "^1.0.0",
+    "@accessible/use-id": "^1.0.2",
+    "@accessible/use-keycode": "^1.0.0",
+    "@react-hook/merged-ref": "^1.0.7",
+    "@react-hook/passive-layout-effect": "^1.0.2",
+    "@react-hook/switch": "^1.0.4",
+    "clsx": "^1.0.4",
+    "react-portalize": "^2.0.2"
+  },
   "peerDependencies": {
     "prop-types": ">=15.6",
     "react": ">=16.8",

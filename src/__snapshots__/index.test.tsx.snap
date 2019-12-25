@@ -1,0 +1,614 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Close> should close the modal 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--15"
+  >
+    <button
+      aria-controls="collapse--15"
+      aria-expanded="true"
+      aria-label="Close"
+      data-testid="close"
+    >
+      Close me
+    </button>
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--15"
+    aria-expanded="true"
+    class="open"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Close> should close the modal: closed 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--15"
+  >
+    <button
+      aria-controls="collapse--15"
+      aria-expanded="false"
+      aria-label="Close"
+      data-testid="close"
+    >
+      Close me
+    </button>
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--15"
+    aria-expanded="false"
+    class="closed"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Collapse> should have a custom id 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--foobar"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--foobar"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Collapse> should provide context to function child 1`] = `
+Object {
+  "close": [Function],
+  "id": "collapse--0",
+  "isOpen": false,
+  "open": [Function],
+  "toggle": [Function],
+}
+`;
+
+exports[`<Target> should act like a controlled component when 'open' prop is specified: closed 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--9"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--9"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should act like a controlled component when 'open' prop is specified: initially open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--9"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--9"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should act like a controlled component when 'open' prop is specified: still closed 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--9"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--9"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should act like a controlled component when 'open' prop is specified: still open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--9"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--9"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should apply custom classname when opened or closed 1`] = `
+<DocumentFragment>
+  <div
+    class="custom"
+    id="collapse--5"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--5"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should apply custom classname when opened or closed: open 1`] = `
+<DocumentFragment>
+  <div
+    class="custom"
+    hidden=""
+    id="collapse--5"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--5"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should apply user defined openClass and closedClass 1`] = `
+<DocumentFragment>
+  <div
+    class="closed"
+    id="collapse--6"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--6"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should apply user defined openClass and closedClass: open 1`] = `
+<DocumentFragment>
+  <div
+    class="open"
+    hidden=""
+    id="collapse--6"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--6"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should apply user defined openStyle and closedStyle 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--7"
+    style="display: none;"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--7"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--7"
+    style="display: block;"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--7"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should assign to custom styles when opened or closed 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--4"
+    style="font-size: 2rem;"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--4"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should assign to custom styles when opened or closed: open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--4"
+    style="font-size: 2rem;"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--4"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should be initially open when defined as such: closed 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--8"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--8"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should be initially open when defined as such: initially open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--8"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--8"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should close on escape key: closed 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--2"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--2"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should close on escape key: closed initially 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--2"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--2"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should close on escape key: open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--2"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--2"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should open and close on Trigger click: closed 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--1"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--1"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should open and close on Trigger click: closed initially 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--1"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--1"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should open and close on Trigger click: open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--1"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--1"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should render into a portal by custom selector 1`] = `
+<body>
+  <div
+    class="portals"
+  >
+    <div
+      hidden=""
+      id="collapse--12"
+    >
+      Hello world
+    </div>
+  </div>
+  <div>
+    <button
+      aria-controls="collapse--12"
+      aria-expanded="true"
+    >
+      open me
+    </button>
+  </div>
+</body>
+`;
+
+exports[`<Target> should render into a portal by custom selector object 1`] = `
+<body>
+  <div
+    class="portals"
+  >
+    <div
+      hidden=""
+      id="collapse--11"
+    >
+      Hello world
+    </div>
+  </div>
+  <div>
+    <button
+      aria-controls="collapse--11"
+      aria-expanded="true"
+    >
+      open me
+    </button>
+  </div>
+</body>
+`;
+
+exports[`<Target> should render into a portal by default ID 1`] = `
+<body>
+  <div
+    id="portals"
+  >
+    <div
+      hidden=""
+      id="collapse--10"
+    >
+      Hello world
+    </div>
+  </div>
+  <div>
+    <button
+      aria-controls="collapse--10"
+      aria-expanded="true"
+    >
+      open me
+    </button>
+  </div>
+</body>
+`;
+
+exports[`<Target> shouldn't close on escape key if prop is false: closed initially 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--3"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--3"
+    aria-expanded="false"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> shouldn't close on escape key if prop is false: open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--3"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--3"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> shouldn't close on escape key if prop is false: still open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--3"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--3"
+    aria-expanded="true"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Trigger> should have openClass and closedClass 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--13"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--13"
+    aria-expanded="false"
+    class="closed"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Trigger> should have openClass and closedClass: open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--13"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--13"
+    aria-expanded="true"
+    class="open"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Trigger> should have openStyle and closedStyle 1`] = `
+<DocumentFragment>
+  <div
+    id="collapse--14"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--14"
+    aria-expanded="false"
+    style="display: none;"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
+<DocumentFragment>
+  <div
+    hidden=""
+    id="collapse--14"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="collapse--14"
+    aria-expanded="true"
+    style="display: block;"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`useCollapse() should return context 1`] = `
+Object {
+  "close": [Function],
+  "id": "collapse--18",
+  "isOpen": false,
+  "open": [Function],
+  "toggle": [Function],
+}
+`;
