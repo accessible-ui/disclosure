@@ -3,7 +3,6 @@
 exports[`<Close> should close the modal 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--15"
   >
     <button
@@ -29,6 +28,7 @@ exports[`<Close> should close the modal 1`] = `
 exports[`<Close> should close the modal: closed 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--15"
   >
     <button
@@ -54,6 +54,7 @@ exports[`<Close> should close the modal: closed 1`] = `
 exports[`<Collapse> should have a custom id 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--foobar"
   >
     Hello world
@@ -80,6 +81,7 @@ Object {
 exports[`<Target> should act like a controlled component when 'open' prop is specified: closed 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--9"
   >
     Hello world
@@ -96,7 +98,6 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should act like a controlled component when 'open' prop is specified: initially open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--9"
   >
     Hello world
@@ -113,6 +114,7 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should act like a controlled component when 'open' prop is specified: still closed 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--9"
   >
     Hello world
@@ -129,7 +131,6 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should act like a controlled component when 'open' prop is specified: still open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--9"
   >
     Hello world
@@ -147,6 +148,7 @@ exports[`<Target> should apply custom classname when opened or closed 1`] = `
 <DocumentFragment>
   <div
     class="custom"
+    hidden=""
     id="collapse--5"
   >
     Hello world
@@ -164,7 +166,6 @@ exports[`<Target> should apply custom classname when opened or closed: open 1`] 
 <DocumentFragment>
   <div
     class="custom"
-    hidden=""
     id="collapse--5"
   >
     Hello world
@@ -182,6 +183,7 @@ exports[`<Target> should apply user defined openClass and closedClass 1`] = `
 <DocumentFragment>
   <div
     class="closed"
+    hidden=""
     id="collapse--6"
   >
     Hello world
@@ -199,7 +201,6 @@ exports[`<Target> should apply user defined openClass and closedClass: open 1`] 
 <DocumentFragment>
   <div
     class="open"
-    hidden=""
     id="collapse--6"
   >
     Hello world
@@ -216,6 +217,7 @@ exports[`<Target> should apply user defined openClass and closedClass: open 1`] 
 exports[`<Target> should apply user defined openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--7"
     style="display: none;"
   >
@@ -233,7 +235,6 @@ exports[`<Target> should apply user defined openStyle and closedStyle 1`] = `
 exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--7"
     style="display: block;"
   >
@@ -251,6 +252,7 @@ exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] 
 exports[`<Target> should assign to custom styles when opened or closed 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--4"
     style="font-size: 2rem;"
   >
@@ -268,7 +270,6 @@ exports[`<Target> should assign to custom styles when opened or closed 1`] = `
 exports[`<Target> should assign to custom styles when opened or closed: open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--4"
     style="font-size: 2rem;"
   >
@@ -286,6 +287,7 @@ exports[`<Target> should assign to custom styles when opened or closed: open 1`]
 exports[`<Target> should be initially open when defined as such: closed 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--8"
   >
     Hello world
@@ -302,7 +304,6 @@ exports[`<Target> should be initially open when defined as such: closed 1`] = `
 exports[`<Target> should be initially open when defined as such: initially open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--8"
   >
     Hello world
@@ -319,6 +320,7 @@ exports[`<Target> should be initially open when defined as such: initially open 
 exports[`<Target> should close on escape key: closed 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--2"
   >
     Hello world
@@ -335,6 +337,7 @@ exports[`<Target> should close on escape key: closed 1`] = `
 exports[`<Target> should close on escape key: closed initially 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--2"
   >
     Hello world
@@ -351,7 +354,6 @@ exports[`<Target> should close on escape key: closed initially 1`] = `
 exports[`<Target> should close on escape key: open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--2"
   >
     Hello world
@@ -368,6 +370,7 @@ exports[`<Target> should close on escape key: open 1`] = `
 exports[`<Target> should open and close on Trigger click: closed 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--1"
   >
     Hello world
@@ -384,6 +387,7 @@ exports[`<Target> should open and close on Trigger click: closed 1`] = `
 exports[`<Target> should open and close on Trigger click: closed initially 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--1"
   >
     Hello world
@@ -400,7 +404,6 @@ exports[`<Target> should open and close on Trigger click: closed initially 1`] =
 exports[`<Target> should open and close on Trigger click: open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--1"
   >
     Hello world
@@ -420,7 +423,6 @@ exports[`<Target> should render into a portal by custom selector 1`] = `
     class="portals"
   >
     <div
-      hidden=""
       id="collapse--12"
     >
       Hello world
@@ -443,7 +445,6 @@ exports[`<Target> should render into a portal by custom selector object 1`] = `
     class="portals"
   >
     <div
-      hidden=""
       id="collapse--11"
     >
       Hello world
@@ -466,7 +467,6 @@ exports[`<Target> should render into a portal by default ID 1`] = `
     id="portals"
   >
     <div
-      hidden=""
       id="collapse--10"
     >
       Hello world
@@ -486,6 +486,7 @@ exports[`<Target> should render into a portal by default ID 1`] = `
 exports[`<Target> shouldn't close on escape key if prop is false: closed initially 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--3"
   >
     Hello world
@@ -502,7 +503,6 @@ exports[`<Target> shouldn't close on escape key if prop is false: closed initial
 exports[`<Target> shouldn't close on escape key if prop is false: open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--3"
   >
     Hello world
@@ -519,7 +519,6 @@ exports[`<Target> shouldn't close on escape key if prop is false: open 1`] = `
 exports[`<Target> shouldn't close on escape key if prop is false: still open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--3"
   >
     Hello world
@@ -536,6 +535,7 @@ exports[`<Target> shouldn't close on escape key if prop is false: still open 1`]
 exports[`<Trigger> should have openClass and closedClass 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--13"
   >
     Hello world
@@ -553,7 +553,6 @@ exports[`<Trigger> should have openClass and closedClass 1`] = `
 exports[`<Trigger> should have openClass and closedClass: open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--13"
   >
     Hello world
@@ -571,6 +570,7 @@ exports[`<Trigger> should have openClass and closedClass: open 1`] = `
 exports[`<Trigger> should have openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
+    hidden=""
     id="collapse--14"
   >
     Hello world
@@ -588,7 +588,6 @@ exports[`<Trigger> should have openStyle and closedStyle 1`] = `
 exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--14"
   >
     Hello world

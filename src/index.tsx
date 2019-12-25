@@ -81,7 +81,7 @@ export const Target: React.FC<TargetProps> = ({
   return portalize(
     cloneElement(children, {
       id,
-      hidden: isOpen || void 0,
+      hidden: !isOpen || void 0,
       className:
         clsx(children.props.className, isOpen ? openClass : closedClass) ||
         void 0,
