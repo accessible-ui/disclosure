@@ -3,6 +3,7 @@
 exports[`<Close> should close the modal 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--15"
     style="visibility: visible;"
   >
@@ -29,6 +30,7 @@ exports[`<Close> should close the modal 1`] = `
 exports[`<Close> should close the modal: closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--15"
     style="visibility: hidden;"
   >
@@ -55,6 +57,7 @@ exports[`<Close> should close the modal: closed 1`] = `
 exports[`<Collapse> should have a custom id 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--foobar"
     style="visibility: hidden;"
   >
@@ -82,6 +85,7 @@ Object {
 exports[`<Target> should act like a controlled component when 'open' prop is specified: closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--9"
     style="visibility: hidden;"
   >
@@ -99,6 +103,7 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should act like a controlled component when 'open' prop is specified: initially open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--9"
     style="visibility: visible;"
   >
@@ -116,6 +121,7 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should act like a controlled component when 'open' prop is specified: still closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--9"
     style="visibility: hidden;"
   >
@@ -133,6 +139,7 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should act like a controlled component when 'open' prop is specified: still open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--9"
     style="visibility: visible;"
   >
@@ -150,6 +157,7 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should apply custom classname when opened or closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     class="custom"
     id="collapse--5"
     style="visibility: hidden;"
@@ -168,6 +176,7 @@ exports[`<Target> should apply custom classname when opened or closed 1`] = `
 exports[`<Target> should apply custom classname when opened or closed: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     class="custom"
     id="collapse--5"
     style="visibility: visible;"
@@ -186,6 +195,7 @@ exports[`<Target> should apply custom classname when opened or closed: open 1`] 
 exports[`<Target> should apply user defined openClass and closedClass 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     class="closed"
     id="collapse--6"
     style="visibility: hidden;"
@@ -204,6 +214,7 @@ exports[`<Target> should apply user defined openClass and closedClass 1`] = `
 exports[`<Target> should apply user defined openClass and closedClass: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     class="open"
     id="collapse--6"
     style="visibility: visible;"
@@ -222,6 +233,7 @@ exports[`<Target> should apply user defined openClass and closedClass: open 1`] 
 exports[`<Target> should apply user defined openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--7"
     style="visibility: hidden; display: none;"
   >
@@ -239,6 +251,7 @@ exports[`<Target> should apply user defined openStyle and closedStyle 1`] = `
 exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--7"
     style="visibility: visible; display: block;"
   >
@@ -256,6 +269,7 @@ exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] 
 exports[`<Target> should assign to custom styles when opened or closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--4"
     style="visibility: hidden; font-size: 2rem;"
   >
@@ -273,6 +287,7 @@ exports[`<Target> should assign to custom styles when opened or closed 1`] = `
 exports[`<Target> should assign to custom styles when opened or closed: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--4"
     style="visibility: visible; font-size: 2rem;"
   >
@@ -290,6 +305,7 @@ exports[`<Target> should assign to custom styles when opened or closed: open 1`]
 exports[`<Target> should be initially open when defined as such: closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--8"
     style="visibility: hidden;"
   >
@@ -307,6 +323,7 @@ exports[`<Target> should be initially open when defined as such: closed 1`] = `
 exports[`<Target> should be initially open when defined as such: initially open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--8"
     style="visibility: visible;"
   >
@@ -324,6 +341,7 @@ exports[`<Target> should be initially open when defined as such: initially open 
 exports[`<Target> should close on escape key: closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--2"
     style="visibility: hidden;"
   >
@@ -341,6 +359,7 @@ exports[`<Target> should close on escape key: closed 1`] = `
 exports[`<Target> should close on escape key: closed initially 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--2"
     style="visibility: hidden;"
   >
@@ -358,6 +377,7 @@ exports[`<Target> should close on escape key: closed initially 1`] = `
 exports[`<Target> should close on escape key: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--2"
     style="visibility: visible;"
   >
@@ -375,6 +395,7 @@ exports[`<Target> should close on escape key: open 1`] = `
 exports[`<Target> should open and close on Trigger click: closed 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--1"
     style="visibility: hidden;"
   >
@@ -392,6 +413,7 @@ exports[`<Target> should open and close on Trigger click: closed 1`] = `
 exports[`<Target> should open and close on Trigger click: closed initially 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--1"
     style="visibility: hidden;"
   >
@@ -409,6 +431,7 @@ exports[`<Target> should open and close on Trigger click: closed initially 1`] =
 exports[`<Target> should open and close on Trigger click: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--1"
     style="visibility: visible;"
   >
@@ -429,6 +452,7 @@ exports[`<Target> should render into a portal by custom selector 1`] = `
     class="portals"
   >
     <div
+      aria-hidden="false"
       id="collapse--12"
       style="visibility: visible;"
     >
@@ -452,6 +476,7 @@ exports[`<Target> should render into a portal by custom selector object 1`] = `
     class="portals"
   >
     <div
+      aria-hidden="false"
       id="collapse--11"
       style="visibility: visible;"
     >
@@ -475,6 +500,7 @@ exports[`<Target> should render into a portal by default ID 1`] = `
     id="portals"
   >
     <div
+      aria-hidden="false"
       id="collapse--10"
       style="visibility: visible;"
     >
@@ -495,6 +521,7 @@ exports[`<Target> should render into a portal by default ID 1`] = `
 exports[`<Target> shouldn't close on escape key if prop is false: closed initially 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--3"
     style="visibility: hidden;"
   >
@@ -512,6 +539,7 @@ exports[`<Target> shouldn't close on escape key if prop is false: closed initial
 exports[`<Target> shouldn't close on escape key if prop is false: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--3"
     style="visibility: visible;"
   >
@@ -529,6 +557,7 @@ exports[`<Target> shouldn't close on escape key if prop is false: open 1`] = `
 exports[`<Target> shouldn't close on escape key if prop is false: still open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--3"
     style="visibility: visible;"
   >
@@ -546,6 +575,7 @@ exports[`<Target> shouldn't close on escape key if prop is false: still open 1`]
 exports[`<Trigger> should have openClass and closedClass 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--13"
     style="visibility: hidden;"
   >
@@ -564,6 +594,7 @@ exports[`<Trigger> should have openClass and closedClass 1`] = `
 exports[`<Trigger> should have openClass and closedClass: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--13"
     style="visibility: visible;"
   >
@@ -582,6 +613,7 @@ exports[`<Trigger> should have openClass and closedClass: open 1`] = `
 exports[`<Trigger> should have openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="true"
     id="collapse--14"
     style="visibility: hidden;"
   >
@@ -600,6 +632,7 @@ exports[`<Trigger> should have openStyle and closedStyle 1`] = `
 exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 <DocumentFragment>
   <div
+    aria-hidden="false"
     id="collapse--14"
     style="visibility: visible;"
   >
