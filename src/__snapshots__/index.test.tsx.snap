@@ -4,6 +4,7 @@ exports[`<Close> should close the modal 1`] = `
 <DocumentFragment>
   <div
     id="collapse--15"
+    style="visibility: visible;"
   >
     <button
       aria-controls="collapse--15"
@@ -28,8 +29,8 @@ exports[`<Close> should close the modal 1`] = `
 exports[`<Close> should close the modal: closed 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--15"
+    style="visibility: hidden;"
   >
     <button
       aria-controls="collapse--15"
@@ -54,8 +55,8 @@ exports[`<Close> should close the modal: closed 1`] = `
 exports[`<Collapse> should have a custom id 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--foobar"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -81,8 +82,8 @@ Object {
 exports[`<Target> should act like a controlled component when 'open' prop is specified: closed 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--9"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -99,6 +100,7 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 <DocumentFragment>
   <div
     id="collapse--9"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -114,8 +116,8 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 exports[`<Target> should act like a controlled component when 'open' prop is specified: still closed 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--9"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -132,6 +134,7 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 <DocumentFragment>
   <div
     id="collapse--9"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -148,8 +151,8 @@ exports[`<Target> should apply custom classname when opened or closed 1`] = `
 <DocumentFragment>
   <div
     class="custom"
-    hidden=""
     id="collapse--5"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -167,6 +170,7 @@ exports[`<Target> should apply custom classname when opened or closed: open 1`] 
   <div
     class="custom"
     id="collapse--5"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -183,8 +187,8 @@ exports[`<Target> should apply user defined openClass and closedClass 1`] = `
 <DocumentFragment>
   <div
     class="closed"
-    hidden=""
     id="collapse--6"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -202,6 +206,7 @@ exports[`<Target> should apply user defined openClass and closedClass: open 1`] 
   <div
     class="open"
     id="collapse--6"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -217,9 +222,8 @@ exports[`<Target> should apply user defined openClass and closedClass: open 1`] 
 exports[`<Target> should apply user defined openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--7"
-    style="display: none;"
+    style="visibility: hidden; display: none;"
   >
     Hello world
   </div>
@@ -236,7 +240,7 @@ exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] 
 <DocumentFragment>
   <div
     id="collapse--7"
-    style="display: block;"
+    style="visibility: visible; display: block;"
   >
     Hello world
   </div>
@@ -252,9 +256,8 @@ exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] 
 exports[`<Target> should assign to custom styles when opened or closed 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--4"
-    style="font-size: 2rem;"
+    style="visibility: hidden; font-size: 2rem;"
   >
     Hello world
   </div>
@@ -271,7 +274,7 @@ exports[`<Target> should assign to custom styles when opened or closed: open 1`]
 <DocumentFragment>
   <div
     id="collapse--4"
-    style="font-size: 2rem;"
+    style="visibility: visible; font-size: 2rem;"
   >
     Hello world
   </div>
@@ -287,8 +290,8 @@ exports[`<Target> should assign to custom styles when opened or closed: open 1`]
 exports[`<Target> should be initially open when defined as such: closed 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--8"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -305,6 +308,7 @@ exports[`<Target> should be initially open when defined as such: initially open 
 <DocumentFragment>
   <div
     id="collapse--8"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -320,8 +324,8 @@ exports[`<Target> should be initially open when defined as such: initially open 
 exports[`<Target> should close on escape key: closed 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--2"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -337,8 +341,8 @@ exports[`<Target> should close on escape key: closed 1`] = `
 exports[`<Target> should close on escape key: closed initially 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--2"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -355,6 +359,7 @@ exports[`<Target> should close on escape key: open 1`] = `
 <DocumentFragment>
   <div
     id="collapse--2"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -370,8 +375,8 @@ exports[`<Target> should close on escape key: open 1`] = `
 exports[`<Target> should open and close on Trigger click: closed 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--1"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -387,8 +392,8 @@ exports[`<Target> should open and close on Trigger click: closed 1`] = `
 exports[`<Target> should open and close on Trigger click: closed initially 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--1"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -405,6 +410,7 @@ exports[`<Target> should open and close on Trigger click: open 1`] = `
 <DocumentFragment>
   <div
     id="collapse--1"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -424,6 +430,7 @@ exports[`<Target> should render into a portal by custom selector 1`] = `
   >
     <div
       id="collapse--12"
+      style="visibility: visible;"
     >
       Hello world
     </div>
@@ -446,6 +453,7 @@ exports[`<Target> should render into a portal by custom selector object 1`] = `
   >
     <div
       id="collapse--11"
+      style="visibility: visible;"
     >
       Hello world
     </div>
@@ -468,6 +476,7 @@ exports[`<Target> should render into a portal by default ID 1`] = `
   >
     <div
       id="collapse--10"
+      style="visibility: visible;"
     >
       Hello world
     </div>
@@ -486,8 +495,8 @@ exports[`<Target> should render into a portal by default ID 1`] = `
 exports[`<Target> shouldn't close on escape key if prop is false: closed initially 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--3"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -504,6 +513,7 @@ exports[`<Target> shouldn't close on escape key if prop is false: open 1`] = `
 <DocumentFragment>
   <div
     id="collapse--3"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -520,6 +530,7 @@ exports[`<Target> shouldn't close on escape key if prop is false: still open 1`]
 <DocumentFragment>
   <div
     id="collapse--3"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -535,8 +546,8 @@ exports[`<Target> shouldn't close on escape key if prop is false: still open 1`]
 exports[`<Trigger> should have openClass and closedClass 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--13"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -554,6 +565,7 @@ exports[`<Trigger> should have openClass and closedClass: open 1`] = `
 <DocumentFragment>
   <div
     id="collapse--13"
+    style="visibility: visible;"
   >
     Hello world
   </div>
@@ -570,8 +582,8 @@ exports[`<Trigger> should have openClass and closedClass: open 1`] = `
 exports[`<Trigger> should have openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
-    hidden=""
     id="collapse--14"
+    style="visibility: hidden;"
   >
     Hello world
   </div>
@@ -589,6 +601,7 @@ exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 <DocumentFragment>
   <div
     id="collapse--14"
+    style="visibility: visible;"
   >
     Hello world
   </div>
