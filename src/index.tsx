@@ -136,8 +136,8 @@ export const Trigger: React.FC<TriggerProps> = ({
   children,
 }) => {
   const {isOpen, id, toggle} = useCollapse()
-  const seen = useRef<boolean>(false)
-  const focusRef = useConditionalFocus(seen.current && !isOpen, true)
+  const prevOpen = useRef<boolean>(isOpen)
+  const focusRef = useConditionalFocus(prevOpen.current && !isOpen, true)
   // @ts-ignore
   const ref = useMergedRef(children.ref, focusRef)
   const onClick = useCallback(
@@ -149,7 +149,7 @@ export const Trigger: React.FC<TriggerProps> = ({
   )
 
   useLayoutEffect(() => {
-    if (!isOpen) seen.current = true
+    prevOpen.current = isOpen
   }, [isOpen])
 
   return cloneElement(children, {
