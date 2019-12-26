@@ -32,7 +32,9 @@ export interface CollapseControls {
 }
 
 // @ts-ignore
-export const CollapseContext = React.createContext<CollapseContextValue>({}),
+export const CollapseContext: React.Context<CollapseContextValue> = React.createContext(
+    {}
+  ),
   {Consumer: CollapseConsumer} = CollapseContext,
   useCollapse = () => useContext<CollapseContextValue>(CollapseContext),
   useIsOpen = () => useCollapse().isOpen,
@@ -187,16 +189,16 @@ export const Collapse: React.FC<CollapseProps> = ({
   // eslint-disable-next-line prefer-const
   let [isOpen, toggle] = useSwitch(defaultOpen)
   isOpen = open === void 0 || open === null ? isOpen : open
-  id = `collapse--${useId(id)}`
+  const realId = `collapse--${useId(id)}`
   const context = useMemo(
     () => ({
-      id,
+      id: realId,
       open: toggle.on,
       close: toggle.off,
       toggle,
       isOpen,
     }),
-    [id, isOpen, toggle.on, toggle.off, toggle]
+    [realId, isOpen, toggle.on, toggle.off, toggle]
   )
 
   return (
