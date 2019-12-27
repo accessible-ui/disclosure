@@ -22,7 +22,7 @@ export interface CollapseContextValue {
   open: () => void
   close: () => void
   toggle: () => void
-  id: string
+  id?: string
 }
 
 export interface CollapseControls {
@@ -42,6 +42,48 @@ export const CollapseContext: React.Context<CollapseContextValue> = React.create
     const {open, close, toggle} = useCollapse()
     return {open, close, toggle}
   }
+
+export interface CollapseProps {
+  open?: boolean
+  defaultOpen?: boolean
+  id?: string
+  children:
+    | React.ReactNode
+    | React.ReactNode[]
+    | JSX.Element[]
+    | JSX.Element
+    | ((context: CollapseContextValue) => React.ReactNode)
+}
+
+export const Collapse: React.FC<CollapseProps> = ({
+  id,
+  open,
+  defaultOpen,
+  children,
+}) => {
+  // eslint-disable-next-line prefer-const
+  let [isOpen, toggle] = useSwitch(defaultOpen)
+  isOpen = open === void 0 || open === null ? isOpen : open
+  id = useId(id)
+  const context = useMemo(
+    () => ({
+      id,
+      open: toggle.on,
+      close: toggle.off,
+      toggle,
+      isOpen,
+    }),
+    [id, isOpen, toggle.on, toggle.off, toggle]
+  )
+
+  return (
+    <CollapseContext.Provider
+      value={context}
+      // @ts-ignore
+      children={typeof children === 'function' ? children(context) : children}
+    />
+  )
+}
 
 const portalize = (
   Component,
@@ -166,48 +208,6 @@ export const Trigger: React.FC<TriggerProps> = ({
     onClick,
     ref,
   })
-}
-
-export interface CollapseProps {
-  open?: boolean
-  defaultOpen?: boolean
-  id?: string
-  children:
-    | React.ReactNode
-    | React.ReactNode[]
-    | JSX.Element[]
-    | JSX.Element
-    | ((context: CollapseContextValue) => React.ReactNode)
-}
-
-export const Collapse: React.FC<CollapseProps> = ({
-  id,
-  open,
-  defaultOpen,
-  children,
-}) => {
-  // eslint-disable-next-line prefer-const
-  let [isOpen, toggle] = useSwitch(defaultOpen)
-  isOpen = open === void 0 || open === null ? isOpen : open
-  const realId = `collapse--${useId(id)}`
-  const context = useMemo(
-    () => ({
-      id: realId,
-      open: toggle.on,
-      close: toggle.off,
-      toggle,
-      isOpen,
-    }),
-    [realId, isOpen, toggle.on, toggle.off, toggle]
-  )
-
-  return (
-    <CollapseContext.Provider
-      value={context}
-      // @ts-ignore
-      children={typeof children === 'function' ? children(context) : children}
-    />
-  )
 }
 
 /* istanbul ignore next */
