@@ -118,6 +118,7 @@ export const Target: React.FC<TargetProps> = ({
 
   return portalize(
     cloneElement(children, {
+      'aria-hidden': `${!isOpen}`,
       id,
       className:
         clsx(children.props.className, isOpen ? openClass : closedClass) ||
@@ -127,7 +128,6 @@ export const Target: React.FC<TargetProps> = ({
         children.props.style,
         isOpen ? openStyle : closedStyle
       ),
-      'aria-hidden': `${!isOpen}`,
       ref,
     }),
     portal
