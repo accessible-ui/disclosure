@@ -1,10 +1,4 @@
-import React, {
-  cloneElement,
-  useRef,
-  useMemo,
-  useContext,
-  useCallback,
-} from 'react'
+import React, {cloneElement, useRef, useMemo, useContext} from 'react'
 import useKeycode from '@accessible/use-keycode'
 import useConditionalFocus from '@accessible/use-conditional-focus'
 import useSwitch from '@react-hook/switch'
@@ -146,19 +140,14 @@ export interface CloseProps {
 
 export const Close: React.FC<CloseProps> = ({children}) => {
   const {close, isOpen, id} = useCollapse()
-  const onClick = useCallback(
-    e => {
-      close()
-      children.props.onClick?.(e)
-    },
-    [close, children.props.onClick]
-  )
-
   return cloneElement(children, {
     'aria-controls': id,
     'aria-expanded': String(isOpen),
     'aria-label': children.props['aria-label'] || 'Close',
-    onClick,
+    onClick: e => {
+      close()
+      children.props.onClick?.(e)
+    },
   })
 }
 
@@ -182,13 +171,6 @@ export const Trigger: React.FC<TriggerProps> = ({
   const focusRef = useConditionalFocus(prevOpen.current && !isOpen, true)
   // @ts-ignore
   const ref = useMergedRef(children.ref, focusRef)
-  const onClick = useCallback(
-    e => {
-      toggle()
-      children.props.onClick?.(e)
-    },
-    [toggle, children.props.onClick]
-  )
 
   useLayoutEffect(() => {
     prevOpen.current = isOpen
@@ -205,7 +187,10 @@ export const Trigger: React.FC<TriggerProps> = ({
       children.props.style,
       isOpen ? openStyle : closedStyle
     ),
-    onClick,
+    onClick: e => {
+      toggle()
+      children.props.onClick?.(e)
+    },
     ref,
   })
 }
