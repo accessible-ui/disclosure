@@ -4,11 +4,11 @@ exports[`<Close> should close the modal 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰16"
+    id="🅰17"
     style="visibility: visible;"
   >
     <button
-      aria-controls="🅰16"
+      aria-controls="🅰17"
       aria-expanded="true"
       aria-label="Close"
       data-testid="close"
@@ -20,7 +20,7 @@ exports[`<Close> should close the modal 1`] = `
     Hello world
   </div>
   <button
-    aria-controls="🅰16"
+    aria-controls="🅰17"
     aria-expanded="true"
     class="open"
     role="button"
@@ -35,11 +35,11 @@ exports[`<Close> should close the modal: closed 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰16"
+    id="🅰17"
     style="visibility: hidden;"
   >
     <button
-      aria-controls="🅰16"
+      aria-controls="🅰17"
       aria-expanded="false"
       aria-label="Close"
       data-testid="close"
@@ -51,7 +51,7 @@ exports[`<Close> should close the modal: closed 1`] = `
     Hello world
   </div>
   <button
-    aria-controls="🅰16"
+    aria-controls="🅰17"
     aria-expanded="false"
     class="closed"
     role="button"
@@ -721,7 +721,7 @@ exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 exports[`useCollapse() should return context 1`] = `
 Object {
   "close": [Function],
-  "id": "🅰19",
+  "id": "🅰21",
   "isOpen": false,
   "open": [Function],
   "toggle": [Function],

@@ -355,6 +355,27 @@ describe('<Trigger>', () => {
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
   })
+
+  it('should fire user-defined onClick handler', () => {
+    const cb = jest.fn()
+    const result = render(
+      <Collapse>
+        <Target>
+          <div>Hello world</div>
+        </Target>
+
+        <Trigger closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
+          <button onClick={cb}>open me</button>
+        </Trigger>
+      </Collapse>
+    )
+
+    fireEvent.click(result.getByText('open me'))
+    expect(cb).toBeCalledTimes(0)
+    fireEvent.mouseDown(result.getByText('open me'))
+    fireEvent.click(result.getByText('open me'))
+    expect(cb).toBeCalledTimes(1)
+  })
 })
 
 describe('<Close>', () => {
@@ -380,6 +401,32 @@ describe('<Close>', () => {
     fireEvent.mouseDown(result.getByTestId('close'))
     fireEvent.click(result.getByTestId('close'))
     expect(result.asFragment()).toMatchSnapshot('closed')
+  })
+
+  it('should fire user-defined onClick handler', () => {
+    const cb = jest.fn()
+    const result = render(
+      <Collapse defaultOpen={true}>
+        <Target>
+          <div>
+            <Close>
+              <button onClick={cb} data-testid="close">Close me</button>
+            </Close>
+            Hello world
+          </div>
+        </Target>
+
+        <Trigger closedClass="closed" openClass="open">
+          <button>open me</button>
+        </Trigger>
+      </Collapse>
+    )
+
+    fireEvent.click(result.getByTestId('close'))
+    expect(cb).toBeCalledTimes(0)
+    fireEvent.mouseDown(result.getByTestId('close'))
+    fireEvent.click(result.getByTestId('close'))
+    expect(cb).toBeCalledTimes(1)
   })
 })
 
