@@ -85,7 +85,10 @@ describe('<Target>', () => {
     fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.keyDown(result.getByText('Hello world'), {key: 'Escape', which: 27})
+    fireEvent.keyDown(result.getByText('Hello world'), {
+      key: 'Escape',
+      which: 27,
+    })
     expect(result.asFragment()).toMatchSnapshot('closed')
   })
 
@@ -106,7 +109,10 @@ describe('<Target>', () => {
     fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.keyDown(result.getByText('Hello world'), {key: 'Escape', code: 27})
+    fireEvent.keyDown(result.getByText('Hello world'), {
+      key: 'Escape',
+      code: 27,
+    })
     expect(result.asFragment()).toMatchSnapshot('still open')
   })
 
