@@ -60,8 +60,10 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed initially')
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('closed')
   })
@@ -80,9 +82,10 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed initially')
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.keyUp(result.getByText('Hello world'), {key: 'Escape', which: 27})
+    fireEvent.keyDown(result.getByText('Hello world'), {key: 'Escape', which: 27})
     expect(result.asFragment()).toMatchSnapshot('closed')
   })
 
@@ -100,9 +103,10 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed initially')
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.keyUp(result.getByText('Hello world'), {key: 'Escape', code: 27})
+    fireEvent.keyDown(result.getByText('Hello world'), {key: 'Escape', code: 27})
     expect(result.asFragment()).toMatchSnapshot('still open')
   })
 
@@ -120,6 +124,7 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot()
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
   })
@@ -138,6 +143,7 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot()
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
   })
@@ -156,6 +162,7 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot()
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
   })
@@ -174,6 +181,7 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot()
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
   })
@@ -192,6 +200,7 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot('initially open')
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('closed')
   })
@@ -210,6 +219,7 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot('initially open')
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('still open')
 
@@ -226,6 +236,7 @@ describe('<Target>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed')
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('still closed')
   })
@@ -247,6 +258,7 @@ describe('<Target>', () => {
       </Collapse>
     )
 
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.baseElement).toMatchSnapshot()
     document.body.removeChild(portalRoot)
@@ -269,6 +281,7 @@ describe('<Target>', () => {
       </Collapse>
     )
 
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.baseElement).toMatchSnapshot()
     document.body.removeChild(portalRoot)
@@ -291,6 +304,7 @@ describe('<Target>', () => {
       </Collapse>
     )
 
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.baseElement).toMatchSnapshot()
     document.body.removeChild(portalRoot)
@@ -312,6 +326,7 @@ describe('<Trigger>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot()
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
   })
@@ -330,6 +345,7 @@ describe('<Trigger>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot()
+    fireEvent.mouseDown(result.getByText('open me'))
     fireEvent.click(result.getByText('open me'))
     expect(result.asFragment()).toMatchSnapshot('open')
   })
@@ -355,6 +371,7 @@ describe('<Close>', () => {
     )
 
     expect(result.asFragment()).toMatchSnapshot()
+    fireEvent.mouseDown(result.getByTestId('close'))
     fireEvent.click(result.getByTestId('close'))
     expect(result.asFragment()).toMatchSnapshot('closed')
   })

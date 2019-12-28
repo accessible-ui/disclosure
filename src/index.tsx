@@ -1,10 +1,11 @@
 import React, {cloneElement, useRef, useMemo, useContext} from 'react'
-import useKeycode from '@accessible/use-keycode'
+import {useKeycodes} from '@accessible/use-keycode'
 import useConditionalFocus from '@accessible/use-conditional-focus'
 import useSwitch from '@react-hook/switch'
 import useMergedRef from '@react-hook/merged-ref'
 import useLayoutEffect from '@react-hook/passive-layout-effect'
 import useId from '@accessible/use-id'
+import Button from '@accessible/button'
 import Portalize from 'react-portalize'
 import clsx from 'clsx'
 
@@ -110,11 +111,19 @@ export const Target: React.FC<TargetProps> = ({
   children,
 }) => {
   const {id, isOpen, close} = useCollapse()
-  // handles closing the modal when the ESC key is pressed
-  const keycodeRef = useKeycode(27, () => closeOnEscape && close())
-  const focusRef = useConditionalFocus(isOpen)
-  // @ts-ignore
-  const ref = useMergedRef(children.ref, focusRef, keycodeRef)
+  const prevOpen = useRef<boolean>(isOpen)
+  const ref = useMergedRef(
+    // @ts-ignore
+    children.ref,
+    // provides the target focus when it is in a new open state
+    useConditionalFocus(!prevOpen.current && isOpen),
+    // handles closing the modal when the ESC key is pressed
+    useKeycodes({27: () => closeOnEscape && close()})
+  )
+
+  useLayoutEffect(() => {
+    prevOpen.current = isOpen
+  }, [isOpen])
 
   return portalize(
     cloneElement(children, {
@@ -140,15 +149,24 @@ export interface CloseProps {
 
 export const Close: React.FC<CloseProps> = ({children}) => {
   const {close, isOpen, id} = useCollapse()
-  return cloneElement(children, {
-    'aria-controls': id,
-    'aria-expanded': String(isOpen),
-    'aria-label': children.props['aria-label'] || 'Close',
-    onClick: e => {
-      close()
-      children.props.onClick?.(e)
-    },
-  })
+  return (
+    <Button>
+      {cloneElement(children, {
+        'aria-controls': id,
+        'aria-expanded': String(isOpen),
+        'aria-label': children.props.hasOwnProperty('aria-label')
+          ? children.props['aria-label']
+          : 'Close',
+        onClick:
+          typeof children.props.onClick === 'function'
+            ? e => {
+                close()
+                children.props.onClick?.(e)
+              }
+            : close,
+      })}
+    </Button>
+  )
 }
 
 export interface TriggerProps {
@@ -168,31 +186,40 @@ export const Trigger: React.FC<TriggerProps> = ({
 }) => {
   const {isOpen, id, toggle} = useCollapse()
   const prevOpen = useRef<boolean>(isOpen)
-  const focusRef = useConditionalFocus(prevOpen.current && !isOpen, true)
-  // @ts-ignore
-  const ref = useMergedRef(children.ref, focusRef)
+  const ref = useMergedRef(
+    // @ts-ignore
+    children.ref,
+    useConditionalFocus(prevOpen.current && !isOpen, true)
+  )
 
   useLayoutEffect(() => {
     prevOpen.current = isOpen
   }, [isOpen])
 
-  return cloneElement(children, {
-    'aria-controls': id,
-    'aria-expanded': String(isOpen),
-    className:
-      clsx(children.props.className, isOpen ? openClass : closedClass) ||
-      void 0,
-    style: Object.assign(
-      {},
-      children.props.style,
-      isOpen ? openStyle : closedStyle
-    ),
-    onClick: e => {
-      toggle()
-      children.props.onClick?.(e)
-    },
-    ref,
-  })
+  return (
+    <Button>
+      {cloneElement(children, {
+        'aria-controls': id,
+        'aria-expanded': String(isOpen),
+        className:
+          clsx(children.props.className, isOpen ? openClass : closedClass) ||
+          void 0,
+        style: Object.assign(
+          {},
+          children.props.style,
+          isOpen ? openStyle : closedStyle
+        ),
+        onClick:
+          typeof children.props.onClick === 'function'
+            ? e => {
+                toggle()
+                children.props.onClick(e)
+              }
+            : toggle,
+        ref,
+      })}
+    </Button>
+  )
 }
 
 /* istanbul ignore next */

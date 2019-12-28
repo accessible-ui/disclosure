@@ -87,9 +87,10 @@
     "typescript": "latest"
   },
   "dependencies": {
+    "@accessible/button": "^1.0.2",
     "@accessible/use-conditional-focus": "^1.0.0",
     "@accessible/use-id": "^1.0.3",
-    "@accessible/use-keycode": "^1.0.2",
+    "@accessible/use-keycode": "^2.0.0",
     "@react-hook/merged-ref": "^1.0.7",
     "@react-hook/passive-layout-effect": "^1.0.2",
     "@react-hook/switch": "^1.0.4",
