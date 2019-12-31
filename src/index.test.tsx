@@ -410,7 +410,9 @@ describe('<Close>', () => {
         <Target>
           <div>
             <Close>
-              <button onClick={cb} data-testid="close">Close me</button>
+              <button onClick={cb} data-testid="close">
+                Close me
+              </button>
             </Close>
             Hello world
           </div>

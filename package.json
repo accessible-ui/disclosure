@@ -1,6 +1,6 @@
 {
   "name": "@accessible/collapse",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "homepage": "https://github.com/accessible-ui/collapse#readme",
   "repository": "github:accessible-ui/collapse",
   "bugs": "https://github.com/accessible-ui/collapse/issues",
@@ -90,7 +90,7 @@
     "@accessible/button": "^1.0.2",
     "@accessible/use-conditional-focus": "^1.0.0",
     "@accessible/use-id": "^1.0.3",
-    "@accessible/use-keycode": "^2.0.0",
+    "@accessible/use-keycode": "^3.0.1",
     "@react-hook/merged-ref": "^1.0.7",
     "@react-hook/passive-layout-effect": "^1.0.2",
     "@react-hook/switch": "^1.0.4",

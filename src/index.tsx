@@ -1,4 +1,10 @@
-import React, {cloneElement, useRef, useMemo, useContext} from 'react'
+import React, {
+  cloneElement,
+  useRef,
+  useMemo,
+  useCallback,
+  useContext,
+} from 'react'
 import {useKeycodes} from '@accessible/use-keycode'
 import useConditionalFocus from '@accessible/use-conditional-focus'
 import useSwitch from '@react-hook/switch'
@@ -118,7 +124,7 @@ export const Target: React.FC<TargetProps> = ({
     // provides the target focus when it is in a new open state
     useConditionalFocus(!prevOpen.current && isOpen),
     // handles closing the modal when the ESC key is pressed
-    useKeycodes({27: () => closeOnEscape && close()})
+    useKeycodes({27: () => closeOnEscape && close()}, [closeOnEscape, close])
   )
 
   useLayoutEffect(() => {
@@ -159,10 +165,13 @@ export const Close: React.FC<CloseProps> = ({children}) => {
           : 'Close',
         onClick:
           typeof children.props.onClick === 'function'
-            ? e => {
-                close()
-                children.props.onClick?.(e)
-              }
+            ? useCallback(
+                e => {
+                  close()
+                  children.props.onClick?.(e)
+                },
+                [children.props.onClick, close]
+              )
             : close,
       })}
     </Button>
