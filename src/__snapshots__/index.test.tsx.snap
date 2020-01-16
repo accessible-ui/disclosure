@@ -4,11 +4,11 @@ exports[`<Close> should close the modal 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰17"
+    id="🅰18"
     style="visibility: visible;"
   >
     <button
-      aria-controls="🅰17"
+      aria-controls="🅰18"
       aria-expanded="true"
       aria-label="Close"
       data-testid="close"
@@ -20,7 +20,7 @@ exports[`<Close> should close the modal 1`] = `
     Hello world
   </div>
   <button
-    aria-controls="🅰17"
+    aria-controls="🅰18"
     aria-expanded="true"
     class="open"
     role="button"
@@ -35,11 +35,11 @@ exports[`<Close> should close the modal: closed 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰17"
+    id="🅰18"
     style="visibility: hidden;"
   >
     <button
-      aria-controls="🅰17"
+      aria-controls="🅰18"
       aria-expanded="false"
       aria-label="Close"
       data-testid="close"
@@ -51,7 +51,7 @@ exports[`<Close> should close the modal: closed 1`] = `
     Hello world
   </div>
   <button
-    aria-controls="🅰17"
+    aria-controls="🅰18"
     aria-expanded="false"
     class="closed"
     role="button"
@@ -96,13 +96,13 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰10"
+    id="🅰11"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰10"
+    aria-controls="🅰11"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -116,13 +116,13 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰10"
+    id="🅰11"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰10"
+    aria-controls="🅰11"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -136,13 +136,13 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰10"
+    id="🅰11"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰10"
+    aria-controls="🅰11"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -156,13 +156,13 @@ exports[`<Target> should act like a controlled component when 'open' prop is spe
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰10"
+    id="🅰11"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰10"
+    aria-controls="🅰11"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -177,13 +177,13 @@ exports[`<Target> should apply custom classname when opened or closed 1`] = `
   <div
     aria-hidden="true"
     class="custom"
-    id="🅰6"
+    id="🅰7"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰6"
+    aria-controls="🅰7"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -198,13 +198,13 @@ exports[`<Target> should apply custom classname when opened or closed: open 1`] 
   <div
     aria-hidden="false"
     class="custom"
-    id="🅰6"
+    id="🅰7"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰6"
+    aria-controls="🅰7"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -219,13 +219,13 @@ exports[`<Target> should apply user defined openClass and closedClass 1`] = `
   <div
     aria-hidden="true"
     class="closed"
-    id="🅰7"
+    id="🅰8"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰7"
+    aria-controls="🅰8"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -240,13 +240,13 @@ exports[`<Target> should apply user defined openClass and closedClass: open 1`] 
   <div
     aria-hidden="false"
     class="open"
-    id="🅰7"
+    id="🅰8"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰7"
+    aria-controls="🅰8"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -260,13 +260,13 @@ exports[`<Target> should apply user defined openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰8"
+    id="🅰9"
     style="visibility: hidden; display: none;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰8"
+    aria-controls="🅰9"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -280,13 +280,13 @@ exports[`<Target> should apply user defined openStyle and closedStyle: open 1`] 
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰8"
+    id="🅰9"
     style="visibility: visible; display: block;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰8"
+    aria-controls="🅰9"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -300,13 +300,13 @@ exports[`<Target> should assign to custom styles when opened or closed 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰5"
+    id="🅰6"
     style="visibility: hidden; font-size: 2rem;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰5"
+    aria-controls="🅰6"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -320,13 +320,13 @@ exports[`<Target> should assign to custom styles when opened or closed: open 1`]
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰5"
+    id="🅰6"
     style="visibility: visible; font-size: 2rem;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰5"
+    aria-controls="🅰6"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -340,13 +340,13 @@ exports[`<Target> should be initially open when defined as such: closed 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰9"
+    id="🅰10"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰9"
+    aria-controls="🅰10"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -360,13 +360,13 @@ exports[`<Target> should be initially open when defined as such: initially open 
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰9"
+    id="🅰10"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰9"
+    aria-controls="🅰10"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -380,13 +380,13 @@ exports[`<Target> should close on escape key: closed 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰3"
+    id="🅰4"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰3"
+    aria-controls="🅰4"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -400,13 +400,13 @@ exports[`<Target> should close on escape key: closed initially 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰3"
+    id="🅰4"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰3"
+    aria-controls="🅰4"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -420,6 +420,66 @@ exports[`<Target> should close on escape key: open 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="false"
+    id="🅰4"
+    style="visibility: visible;"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="🅰4"
+    aria-expanded="true"
+    role="button"
+    tabindex="0"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should open and close on Trigger click: closed 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    id="🅰3"
+    style="visibility: hidden;"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="🅰3"
+    aria-expanded="false"
+    role="button"
+    tabindex="0"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should open and close on Trigger click: closed initially 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    id="🅰3"
+    style="visibility: hidden;"
+  >
+    Hello world
+  </div>
+  <button
+    aria-controls="🅰3"
+    aria-expanded="false"
+    role="button"
+    tabindex="0"
+  >
+    open me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`<Target> should open and close on Trigger click: open 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="false"
     id="🅰3"
     style="visibility: visible;"
   >
@@ -436,67 +496,33 @@ exports[`<Target> should close on escape key: open 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Target> should open and close on Trigger click: closed 1`] = `
-<DocumentFragment>
-  <div
-    aria-hidden="true"
-    id="🅰2"
-    style="visibility: hidden;"
-  >
-    Hello world
-  </div>
-  <button
-    aria-controls="🅰2"
-    aria-expanded="false"
-    role="button"
-    tabindex="0"
-  >
-    open me
-  </button>
-</DocumentFragment>
-`;
-
-exports[`<Target> should open and close on Trigger click: closed initially 1`] = `
-<DocumentFragment>
-  <div
-    aria-hidden="true"
-    id="🅰2"
-    style="visibility: hidden;"
-  >
-    Hello world
-  </div>
-  <button
-    aria-controls="🅰2"
-    aria-expanded="false"
-    role="button"
-    tabindex="0"
-  >
-    open me
-  </button>
-</DocumentFragment>
-`;
-
-exports[`<Target> should open and close on Trigger click: open 1`] = `
-<DocumentFragment>
-  <div
-    aria-hidden="false"
-    id="🅰2"
-    style="visibility: visible;"
-  >
-    Hello world
-  </div>
-  <button
-    aria-controls="🅰2"
-    aria-expanded="true"
-    role="button"
-    tabindex="0"
-  >
-    open me
-  </button>
-</DocumentFragment>
-`;
-
 exports[`<Target> should render into a portal by custom selector 1`] = `
+<body>
+  <div
+    class="portals"
+  >
+    <div
+      aria-hidden="false"
+      id="🅰14"
+      style="visibility: visible;"
+    >
+      Hello world
+    </div>
+  </div>
+  <div>
+    <button
+      aria-controls="🅰14"
+      aria-expanded="true"
+      role="button"
+      tabindex="0"
+    >
+      open me
+    </button>
+  </div>
+</body>
+`;
+
+exports[`<Target> should render into a portal by custom selector object 1`] = `
 <body>
   <div
     class="portals"
@@ -522,10 +548,10 @@ exports[`<Target> should render into a portal by custom selector 1`] = `
 </body>
 `;
 
-exports[`<Target> should render into a portal by custom selector object 1`] = `
+exports[`<Target> should render into a portal by default ID 1`] = `
 <body>
   <div
-    class="portals"
+    id="portals"
   >
     <div
       aria-hidden="false"
@@ -548,43 +574,17 @@ exports[`<Target> should render into a portal by custom selector object 1`] = `
 </body>
 `;
 
-exports[`<Target> should render into a portal by default ID 1`] = `
-<body>
-  <div
-    id="portals"
-  >
-    <div
-      aria-hidden="false"
-      id="🅰11"
-      style="visibility: visible;"
-    >
-      Hello world
-    </div>
-  </div>
-  <div>
-    <button
-      aria-controls="🅰11"
-      aria-expanded="true"
-      role="button"
-      tabindex="0"
-    >
-      open me
-    </button>
-  </div>
-</body>
-`;
-
 exports[`<Target> shouldn't close on escape key if prop is false: closed initially 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰4"
+    id="🅰5"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰4"
+    aria-controls="🅰5"
     aria-expanded="false"
     role="button"
     tabindex="0"
@@ -598,13 +598,13 @@ exports[`<Target> shouldn't close on escape key if prop is false: open 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰4"
+    id="🅰5"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰4"
+    aria-controls="🅰5"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -618,13 +618,13 @@ exports[`<Target> shouldn't close on escape key if prop is false: still open 1`]
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰4"
+    id="🅰5"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰4"
+    aria-controls="🅰5"
     aria-expanded="true"
     role="button"
     tabindex="0"
@@ -638,13 +638,13 @@ exports[`<Trigger> should have openClass and closedClass 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰14"
+    id="🅰15"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰14"
+    aria-controls="🅰15"
     aria-expanded="false"
     class="closed"
     role="button"
@@ -659,13 +659,13 @@ exports[`<Trigger> should have openClass and closedClass: open 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰14"
+    id="🅰15"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰14"
+    aria-controls="🅰15"
     aria-expanded="true"
     class="open"
     role="button"
@@ -680,13 +680,13 @@ exports[`<Trigger> should have openStyle and closedStyle 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰15"
+    id="🅰16"
     style="visibility: hidden;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰15"
+    aria-controls="🅰16"
     aria-expanded="false"
     role="button"
     style="display: none;"
@@ -701,13 +701,13 @@ exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰15"
+    id="🅰16"
     style="visibility: visible;"
   >
     Hello world
   </div>
   <button
-    aria-controls="🅰15"
+    aria-controls="🅰16"
     aria-expanded="true"
     role="button"
     style="display: block;"
@@ -721,7 +721,7 @@ exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 exports[`useCollapse() should return context 1`] = `
 Object {
   "close": [Function],
-  "id": "🅰21",
+  "id": "🅰22",
   "isOpen": false,
   "open": [Function],
   "toggle": [Function],

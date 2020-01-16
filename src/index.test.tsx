@@ -43,6 +43,26 @@ describe('<Collapse>', () => {
 
     expect(cxt).toMatchSnapshot()
   })
+
+  it('should invoke onChange callback when open state changes', () => {
+    const handleChange = jest.fn()
+
+    const {getByTestId} = render(
+      <Collapse onChange={handleChange}>
+        <Trigger>
+          <button data-testid="btn">open me</button>
+        </Trigger>
+      </Collapse>
+    )
+
+    expect(handleChange).not.toBeCalled()
+    fireEvent.mouseDown(getByTestId('btn'))
+    fireEvent.click(getByTestId('btn'))
+    expect(handleChange).toBeCalledWith(true)
+    fireEvent.mouseDown(getByTestId('btn'))
+    fireEvent.click(getByTestId('btn'))
+    expect(handleChange).toBeCalledWith(false)
+  })
 })
 
 describe('<Target>', () => {

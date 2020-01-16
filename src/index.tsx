@@ -3,6 +3,7 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  useEffect,
   useContext,
 } from 'react'
 import {useKeycodes} from '@accessible/use-keycode'
@@ -48,6 +49,7 @@ export interface CollapseProps {
   open?: boolean
   defaultOpen?: boolean
   id?: string
+  onChange?: (open: boolean) => void
   children:
     | React.ReactNode
     | React.ReactNode[]
@@ -60,12 +62,20 @@ export const Collapse: React.FC<CollapseProps> = ({
   id,
   open,
   defaultOpen,
+  onChange,
   children,
 }) => {
   // eslint-disable-next-line prefer-const
   let [isOpen, toggle] = useSwitch(defaultOpen)
   isOpen = open === void 0 || open === null ? isOpen : open
+  const prevOpen = useRef(isOpen)
   id = useId(id)
+
+  useEffect(() => {
+    if (isOpen !== prevOpen.current) onChange?.(isOpen)
+    prevOpen.current = isOpen
+  }, [isOpen])
+
   const context = useMemo(
     () => ({
       id,
