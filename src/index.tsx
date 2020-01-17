@@ -19,7 +19,7 @@ import clsx from 'clsx'
 const __DEV__ =
   typeof process !== 'undefined' && process.env.NODE_ENV !== 'production'
 
-export interface CollapseContextValue {
+export interface DisclosureContextValue {
   isOpen: boolean
   open: () => void
   close: () => void
@@ -27,25 +27,25 @@ export interface CollapseContextValue {
   id?: string
 }
 
-export interface CollapseControls {
+export interface DisclosureControls {
   open: () => void
   close: () => void
   toggle: () => void
 }
 
 // @ts-ignore
-export const CollapseContext: React.Context<CollapseContextValue> = React.createContext(
+export const DisclosureContext: React.Context<DisclosureContextValue> = React.createContext(
     {}
   ),
-  {Consumer: CollapseConsumer} = CollapseContext,
-  useCollapse = () => useContext<CollapseContextValue>(CollapseContext),
-  useIsOpen = () => useCollapse().isOpen,
-  useControls = (): CollapseControls => {
-    const {open, close, toggle} = useCollapse()
+  {Consumer: DisclosureConsumer} = DisclosureContext,
+  useDisclosure = () => useContext<DisclosureContextValue>(DisclosureContext),
+  useIsOpen = () => useDisclosure().isOpen,
+  useControls = (): DisclosureControls => {
+    const {open, close, toggle} = useDisclosure()
     return {open, close, toggle}
   }
 
-export interface CollapseProps {
+export interface DisclosureProps {
   open?: boolean
   defaultOpen?: boolean
   id?: string
@@ -55,10 +55,10 @@ export interface CollapseProps {
     | React.ReactNode[]
     | JSX.Element[]
     | JSX.Element
-    | ((context: CollapseContextValue) => React.ReactNode)
+    | ((context: DisclosureContextValue) => React.ReactNode)
 }
 
-export const Collapse: React.FC<CollapseProps> = ({
+export const Disclosure: React.FC<DisclosureProps> = ({
   id,
   open,
   defaultOpen,
@@ -88,7 +88,7 @@ export const Collapse: React.FC<CollapseProps> = ({
   )
 
   return (
-    <CollapseContext.Provider
+    <DisclosureContext.Provider
       value={context}
       // @ts-ignore
       children={typeof children === 'function' ? children(context) : children}
@@ -126,7 +126,7 @@ export const Target: React.FC<TargetProps> = ({
   closedStyle,
   children,
 }) => {
-  const {id, isOpen, close} = useCollapse()
+  const {id, isOpen, close} = useDisclosure()
   const prevOpen = useRef<boolean>(isOpen)
   const ref = useMergedRef(
     // @ts-ignore
@@ -164,7 +164,7 @@ export interface CloseProps {
 }
 
 export const Close: React.FC<CloseProps> = ({children}) => {
-  const {close, isOpen, id} = useCollapse()
+  const {close, isOpen, id} = useDisclosure()
   return (
     <Button>
       {cloneElement(children, {
@@ -203,7 +203,7 @@ export const Trigger: React.FC<TriggerProps> = ({
   closedStyle,
   children,
 }) => {
-  const {isOpen, id, toggle} = useCollapse()
+  const {isOpen, id, toggle} = useDisclosure()
   const prevOpen = useRef<boolean>(isOpen)
   const ref = useMergedRef(
     // @ts-ignore
@@ -243,7 +243,7 @@ export const Trigger: React.FC<TriggerProps> = ({
 
 /* istanbul ignore next */
 if (__DEV__) {
-  Collapse.displayName = 'Collapse'
+  Disclosure.displayName = 'Disclosure'
   Target.displayName = 'Target'
   Trigger.displayName = 'Trigger'
   Close.displayName = 'Close'

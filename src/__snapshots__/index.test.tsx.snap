@@ -62,7 +62,7 @@ exports[`<Close> should close the modal: closed 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Collapse> should have a custom id 1`] = `
+exports[`<Disclosure> should have a custom id 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
@@ -82,7 +82,7 @@ exports[`<Collapse> should have a custom id 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Collapse> should provide context to function child 1`] = `
+exports[`<Disclosure> should provide context to function child 1`] = `
 Object {
   "close": [Function],
   "id": "🅰1",
@@ -718,7 +718,7 @@ exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 </DocumentFragment>
 `;
 
-exports[`useCollapse() should return context 1`] = `
+exports[`useDisclosure() should return context 1`] = `
 Object {
   "close": [Function],
   "id": "🅰22",

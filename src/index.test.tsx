@@ -3,19 +3,19 @@ import * as React from 'react'
 import {renderHook} from '@testing-library/react-hooks'
 import {render, fireEvent} from '@testing-library/react'
 import {
-  Collapse,
+  Disclosure,
   Trigger,
   Target,
   Close,
   useControls,
   useIsOpen,
-  useCollapse,
+  useDisclosure,
 } from './index'
 
-describe('<Collapse>', () => {
+describe('<Disclosure>', () => {
   it('should have a custom id', () => {
     const result = render(
-      <Collapse id="foobar">
+      <Disclosure id="foobar">
         <Target>
           <div>Hello world</div>
         </Target>
@@ -23,7 +23,7 @@ describe('<Collapse>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -33,12 +33,12 @@ describe('<Collapse>', () => {
     let cxt
 
     render(
-      <Collapse>
+      <Disclosure>
         {context => {
           cxt = context
           return <div />
         }}
-      </Collapse>
+      </Disclosure>
     )
 
     expect(cxt).toMatchSnapshot()
@@ -48,11 +48,11 @@ describe('<Collapse>', () => {
     const handleChange = jest.fn()
 
     const {getByTestId} = render(
-      <Collapse onChange={handleChange}>
+      <Disclosure onChange={handleChange}>
         <Trigger>
           <button data-testid="btn">open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(handleChange).not.toBeCalled()
@@ -68,7 +68,7 @@ describe('<Collapse>', () => {
 describe('<Target>', () => {
   it('should open and close on Trigger click', () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -76,7 +76,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed initially')
@@ -90,7 +90,7 @@ describe('<Target>', () => {
 
   it('should close on escape key', () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -98,7 +98,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed initially')
@@ -114,7 +114,7 @@ describe('<Target>', () => {
 
   it(`shouldn't close on escape key if prop is false`, () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target closeOnEscape={false}>
           <div>Hello world</div>
         </Target>
@@ -122,7 +122,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed initially')
@@ -138,7 +138,7 @@ describe('<Target>', () => {
 
   it(`should assign to custom styles when opened or closed`, () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target>
           <div style={{fontSize: '2rem'}}>Hello world</div>
         </Target>
@@ -146,7 +146,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -157,7 +157,7 @@ describe('<Target>', () => {
 
   it(`should apply custom classname when opened or closed`, () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target>
           <div className="custom">Hello world</div>
         </Target>
@@ -165,7 +165,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -176,7 +176,7 @@ describe('<Target>', () => {
 
   it(`should apply user defined openClass and closedClass`, () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target closedClass="closed" openClass="open">
           <div>Hello world</div>
         </Target>
@@ -184,7 +184,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -195,7 +195,7 @@ describe('<Target>', () => {
 
   it(`should apply user defined openStyle and closedStyle`, () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
           <div>Hello world</div>
         </Target>
@@ -203,7 +203,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -214,7 +214,7 @@ describe('<Target>', () => {
 
   it(`should be initially open when defined as such`, () => {
     const result = render(
-      <Collapse defaultOpen>
+      <Disclosure defaultOpen>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -222,7 +222,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot('initially open')
@@ -233,7 +233,7 @@ describe('<Target>', () => {
 
   it(`should act like a controlled component when 'open' prop is specified`, () => {
     const result = render(
-      <Collapse open>
+      <Disclosure open>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -241,7 +241,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot('initially open')
@@ -250,7 +250,7 @@ describe('<Target>', () => {
     expect(result.asFragment()).toMatchSnapshot('still open')
 
     result.rerender(
-      <Collapse open={false}>
+      <Disclosure open={false}>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -258,7 +258,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot('closed')
@@ -273,7 +273,7 @@ describe('<Target>', () => {
     document.body.appendChild(portalRoot)
 
     const result = render(
-      <Collapse open>
+      <Disclosure open>
         <Target portal>
           <div>Hello world</div>
         </Target>
@@ -281,7 +281,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     fireEvent.mouseDown(result.getByText('open me'))
@@ -296,7 +296,7 @@ describe('<Target>', () => {
     document.body.appendChild(portalRoot)
 
     const result = render(
-      <Collapse open>
+      <Disclosure open>
         <Target portal={{container: '.portals'}}>
           <div>Hello world</div>
         </Target>
@@ -304,7 +304,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     fireEvent.mouseDown(result.getByText('open me'))
@@ -319,7 +319,7 @@ describe('<Target>', () => {
     document.body.appendChild(portalRoot)
 
     const result = render(
-      <Collapse open>
+      <Disclosure open>
         <Target portal=".portals">
           <div>Hello world</div>
         </Target>
@@ -327,7 +327,7 @@ describe('<Target>', () => {
         <Trigger>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     fireEvent.mouseDown(result.getByText('open me'))
@@ -340,7 +340,7 @@ describe('<Target>', () => {
 describe('<Trigger>', () => {
   it('should have openClass and closedClass', () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -348,7 +348,7 @@ describe('<Trigger>', () => {
         <Trigger closedClass="closed" openClass="open">
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -359,7 +359,7 @@ describe('<Trigger>', () => {
 
   it('should have openStyle and closedStyle', () => {
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -367,7 +367,7 @@ describe('<Trigger>', () => {
         <Trigger closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -379,7 +379,7 @@ describe('<Trigger>', () => {
   it('should fire user-defined onClick handler', () => {
     const cb = jest.fn()
     const result = render(
-      <Collapse>
+      <Disclosure>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -387,7 +387,7 @@ describe('<Trigger>', () => {
         <Trigger closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
           <button onClick={cb}>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     fireEvent.click(result.getByText('open me'))
@@ -401,7 +401,7 @@ describe('<Trigger>', () => {
 describe('<Close>', () => {
   it('should close the modal', () => {
     const result = render(
-      <Collapse defaultOpen={true}>
+      <Disclosure defaultOpen={true}>
         <Target>
           <div>
             <Close>
@@ -414,7 +414,7 @@ describe('<Close>', () => {
         <Trigger closedClass="closed" openClass="open">
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     expect(result.asFragment()).toMatchSnapshot()
@@ -426,7 +426,7 @@ describe('<Close>', () => {
   it('should fire user-defined onClick handler', () => {
     const cb = jest.fn()
     const result = render(
-      <Collapse defaultOpen={true}>
+      <Disclosure defaultOpen={true}>
         <Target>
           <div>
             <Close>
@@ -441,7 +441,7 @@ describe('<Close>', () => {
         <Trigger closedClass="closed" openClass="open">
           <button>open me</button>
         </Trigger>
-      </Collapse>
+      </Disclosure>
     )
 
     fireEvent.click(result.getByTestId('close'))
@@ -454,7 +454,7 @@ describe('<Close>', () => {
 
 describe('useControls()', () => {
   it('should have toggle, open, close keys', () => {
-    const {result} = renderHook(() => useControls(), {wrapper: Collapse})
+    const {result} = renderHook(() => useControls(), {wrapper: Disclosure})
     expect(Object.keys(result.current)).toStrictEqual([
       'open',
       'close',
@@ -465,14 +465,14 @@ describe('useControls()', () => {
 
 describe('useIsOpen()', () => {
   it('should return boolean', () => {
-    const {result} = renderHook(() => useIsOpen(), {wrapper: Collapse})
+    const {result} = renderHook(() => useIsOpen(), {wrapper: Disclosure})
     expect(typeof result.current).toBe('boolean')
   })
 })
 
-describe('useCollapse()', () => {
+describe('useDisclosure()', () => {
   it('should return context', () => {
-    const {result} = renderHook(() => useCollapse(), {wrapper: Collapse})
+    const {result} = renderHook(() => useDisclosure(), {wrapper: Disclosure})
     expect(result.current).toMatchSnapshot()
   })
 })
