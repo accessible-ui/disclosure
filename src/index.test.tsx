@@ -405,7 +405,9 @@ describe('<Close>', () => {
         <Target>
           <div>
             <Close>
-              <button data-testid="close" aria-label="close me">Close me</button>
+              <button data-testid="close" aria-label="close me">
+                Close me
+              </button>
             </Close>
             Hello world
           </div>
