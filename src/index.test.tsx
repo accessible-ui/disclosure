@@ -399,6 +399,23 @@ describe('<Trigger>', () => {
 })
 
 describe('<Close>', () => {
+  it('should override the aria label', () => {
+    const result = render(
+      <Disclosure defaultOpen={true}>
+        <Target>
+          <div>
+            <Close>
+              <button data-testid="close" aria-label="close me">Close me</button>
+            </Close>
+            Hello world
+          </div>
+        </Target>
+      </Disclosure>
+    )
+
+    expect(result.asFragment()).toMatchSnapshot('aria-label="close me"')
+  })
+
   it('should close the modal', () => {
     const result = render(
       <Disclosure defaultOpen={true}>

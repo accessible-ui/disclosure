@@ -4,11 +4,11 @@ exports[`<Close> should close the modal 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="false"
-    id="🅰18"
+    id="🅰19"
     style="visibility: visible;"
   >
     <button
-      aria-controls="🅰18"
+      aria-controls="🅰19"
       aria-expanded="true"
       aria-label="Close"
       data-testid="close"
@@ -20,7 +20,7 @@ exports[`<Close> should close the modal 1`] = `
     Hello world
   </div>
   <button
-    aria-controls="🅰18"
+    aria-controls="🅰19"
     aria-expanded="true"
     class="open"
     role="button"
@@ -35,11 +35,11 @@ exports[`<Close> should close the modal: closed 1`] = `
 <DocumentFragment>
   <div
     aria-hidden="true"
-    id="🅰18"
+    id="🅰19"
     style="visibility: hidden;"
   >
     <button
-      aria-controls="🅰18"
+      aria-controls="🅰19"
       aria-expanded="false"
       aria-label="Close"
       data-testid="close"
@@ -51,7 +51,7 @@ exports[`<Close> should close the modal: closed 1`] = `
     Hello world
   </div>
   <button
-    aria-controls="🅰18"
+    aria-controls="🅰19"
     aria-expanded="false"
     class="closed"
     role="button"
@@ -59,6 +59,28 @@ exports[`<Close> should close the modal: closed 1`] = `
   >
     open me
   </button>
+</DocumentFragment>
+`;
+
+exports[`<Close> should override the aria label: aria-label="close me" 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="false"
+    id="🅰18"
+    style="visibility: visible;"
+  >
+    <button
+      aria-controls="🅰18"
+      aria-expanded="true"
+      aria-label="close me"
+      data-testid="close"
+      role="button"
+      tabindex="0"
+    >
+      Close me
+    </button>
+    Hello world
+  </div>
 </DocumentFragment>
 `;
 
@@ -721,7 +743,7 @@ exports[`<Trigger> should have openStyle and closedStyle: open 1`] = `
 exports[`useDisclosure() should return context 1`] = `
 Object {
   "close": [Function],
-  "id": "🅰22",
+  "id": "🅰23",
   "isOpen": false,
   "open": [Function],
   "toggle": [Function],
