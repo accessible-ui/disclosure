@@ -1,3 +1,5 @@
+### This package has moved to [disclosure](https://github.com/accessible-ui/disclosure)
+
 <hr>
 <div align="center">
   <h1 align="center">
@@ -11,12 +13,6 @@
   </a>
   <a aria-label="Types" href="https://www.npmjs.com/package/@accessible/collapse">
     <img alt="Types" src="https://img.shields.io/npm/types/@accessible/collapse?style=for-the-badge&labelColor=24292e">
-  </a>
-  <a aria-label="Code coverage report" href="https://codecov.io/gh/accessible-ui/collapse">
-    <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/accessible-ui/collapse?style=for-the-badge&labelColor=24292e">
-  </a>
-  <a aria-label="Build status" href="https://travis-ci.org/accessible-ui/collapse">
-    <img alt="Build status" src="https://img.shields.io/travis/accessible-ui/collapse?style=for-the-badge&labelColor=24292e">
   </a>
   <a aria-label="NPM version" href="https://www.npmjs.com/package/@accessible/collapse">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/@accessible/collapse?style=for-the-badge&labelColor=24292e">
