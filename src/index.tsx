@@ -114,7 +114,7 @@ export interface TargetProps {
   closedClass?: string
   openStyle?: React.CSSProperties
   closedStyle?: React.CSSProperties
-  children: React.ReactElement
+  children: JSX.Element | React.ReactElement
 }
 
 export const Target: React.FC<TargetProps> = ({
