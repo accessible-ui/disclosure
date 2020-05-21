@@ -67,7 +67,6 @@ export const Disclosure: React.FC<DisclosureProps> = ({
 }) => {
   // eslint-disable-next-line prefer-const
   let [isOpen, toggle] = useSwitch(defaultOpen)
-  isOpen = open === void 0 || open === null ? isOpen : open
   const prevOpen = useRef(isOpen)
   id = useId(id)
 
@@ -82,9 +81,9 @@ export const Disclosure: React.FC<DisclosureProps> = ({
       open: toggle.on,
       close: toggle.off,
       toggle,
-      isOpen,
+      isOpen: open === void 0 || open === null ? isOpen : open,
     }),
-    [id, isOpen, toggle.on, toggle.off, toggle]
+    [id, open, isOpen, toggle]
   )
 
   return (
