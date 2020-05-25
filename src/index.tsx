@@ -133,7 +133,7 @@ export const Target: React.FC<TargetProps> = ({
     // provides the target focus when it is in a new open state
     useConditionalFocus(!prevOpen.current && isOpen, true),
     // handles closing the modal when the ESC key is pressed
-    useKeycodes({27: () => closeOnEscape && close()}, [closeOnEscape, close])
+    useKeycodes({27: () => closeOnEscape && close()})
   )
 
   useLayoutEffect(() => {

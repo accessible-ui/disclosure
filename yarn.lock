@@ -5,6 +5,7 @@
 "@accessible/button@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@accessible/button/-/button-1.0.3.tgz#1164b640073b48200aa272251cb90cbbbf44219b"
+  integrity sha512-jUhHyFKhqWenFMU4az/Ve9+Qm9S7DKel5AYoGnhQ24Rq0tkeyOZC88DX4UFQ5Rupjs3KK9xpe9MGC5QRrd9m/w==
   dependencies:
     "@accessible/use-keycode" "^3.0.1"
     "@react-hook/merged-ref" "^1.0.8"
@@ -30,6 +31,13 @@
 "@accessible/use-keycode@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@accessible/use-keycode/-/use-keycode-3.0.1.tgz#0325eb1dd548fc0201de70c3a8fd2c748f826c51"
+  dependencies:
+    "@react-hook/passive-layout-effect" "^1.0.2"
+
+"@accessible/use-keycode@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@accessible/use-keycode/-/use-keycode-4.0.0.tgz#748fd434fabd5d2f2ff25ce88c8f37c0b4b8fcd5"
+  integrity sha512-Afv2fUNw80rz0KkJngD1yKbuTkNlFGXhbVPrpocugzqgNIcE+K667g1U7bj4KDaTjRNWqrQOOPgWkBPrnyp7rg==
   dependencies:
     "@react-hook/passive-layout-effect" "^1.0.2"
 

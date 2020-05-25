@@ -1,6 +1,6 @@
 {
   "name": "@accessible/disclosure",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/accessible-ui/disclosure#readme",
   "repository": "github:accessible-ui/disclosure",
   "bugs": "https://github.com/accessible-ui/disclosure/issues",
@@ -90,7 +90,7 @@
     "@accessible/button": "^1.0.3",
     "@accessible/use-conditional-focus": "^1.0.1",
     "@accessible/use-id": "^1.0.4",
-    "@accessible/use-keycode": "^3.0.1",
+    "@accessible/use-keycode": "^4.0.0",
     "@react-hook/merged-ref": "^1.0.8",
     "@react-hook/passive-layout-effect": "^1.0.2",
     "@react-hook/switch": "^1.0.4",
