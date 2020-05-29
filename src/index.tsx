@@ -117,6 +117,7 @@ export interface TargetProps {
   closedClass?: string
   openStyle?: React.CSSProperties
   closedStyle?: React.CSSProperties
+  preventScroll?: boolean
   children: JSX.Element | React.ReactElement
 }
 
@@ -127,6 +128,7 @@ export const Target: React.FC<TargetProps> = ({
   closedClass,
   openStyle,
   closedStyle,
+  preventScroll,
   children,
 }) => {
   const {id, isOpen, close} = useDisclosure()
@@ -135,7 +137,10 @@ export const Target: React.FC<TargetProps> = ({
     // @ts-ignore
     children.ref,
     // provides the target focus when it is in a new open state
-    useConditionalFocus(!prevOpen.current && isOpen, {includeRoot: true}),
+    useConditionalFocus(!prevOpen.current && isOpen, {
+      includeRoot: true,
+      preventScroll,
+    }),
     // handles closing the modal when the ESC key is pressed
     useKeycodes({27: () => closeOnEscape && close()})
   )

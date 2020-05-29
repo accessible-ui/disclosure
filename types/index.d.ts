@@ -36,6 +36,7 @@ export interface TargetProps {
   closedClass?: string
   openStyle?: React.CSSProperties
   closedStyle?: React.CSSProperties
+  preventScroll?: boolean
   children: JSX.Element | React.ReactElement
 }
 export declare const Target: React.FC<TargetProps>
