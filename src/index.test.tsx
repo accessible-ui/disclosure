@@ -34,7 +34,7 @@ describe('<Disclosure>', () => {
 
     render(
       <Disclosure>
-        {context => {
+        {(context) => {
           cxt = context
           return <div />
         }}

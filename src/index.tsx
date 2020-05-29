@@ -33,10 +33,13 @@ export interface DisclosureControls {
   toggle: () => void
 }
 
-// @ts-ignore
-export const DisclosureContext: React.Context<DisclosureContextValue> = React.createContext(
-    {}
-  ),
+const noop = () => {}
+export const DisclosureContext = React.createContext<DisclosureContextValue>({
+    isOpen: false,
+    open: noop,
+    close: noop,
+    toggle: noop,
+  }),
   {Consumer: DisclosureConsumer} = DisclosureContext,
   useDisclosure = () => useContext<DisclosureContextValue>(DisclosureContext),
   useIsOpen = () => useDisclosure().isOpen,
@@ -68,10 +71,11 @@ export const Disclosure: React.FC<DisclosureProps> = ({
   // eslint-disable-next-line prefer-const
   let [isOpen, toggle] = useSwitch(defaultOpen)
   const prevOpen = useRef(isOpen)
+  const storedOnChange = useRef(onChange)
   id = useId(id)
 
   useEffect(() => {
-    if (isOpen !== prevOpen.current) onChange?.(isOpen)
+    if (isOpen !== prevOpen.current) storedOnChange.current?.(isOpen)
     prevOpen.current = isOpen
   }, [isOpen])
 
@@ -96,7 +100,7 @@ export const Disclosure: React.FC<DisclosureProps> = ({
 }
 
 const portalize = (
-  Component,
+  Component: React.ReactElement,
   portal: boolean | undefined | null | string | Record<any, any>
 ) => {
   if (portal === false || portal === void 0 || portal === null) return Component
@@ -131,7 +135,7 @@ export const Target: React.FC<TargetProps> = ({
     // @ts-ignore
     children.ref,
     // provides the target focus when it is in a new open state
-    useConditionalFocus(!prevOpen.current && isOpen, true),
+    useConditionalFocus(!prevOpen.current && isOpen, {includeRoot: true}),
     // handles closing the modal when the ESC key is pressed
     useKeycodes({27: () => closeOnEscape && close()})
   )
@@ -164,6 +168,9 @@ export interface CloseProps {
 
 export const Close: React.FC<CloseProps> = ({children}) => {
   const {close, isOpen, id} = useDisclosure()
+  const storedOnClick = useRef(children.props.onClick)
+  storedOnClick.current = children.props.onClick
+
   return (
     <Button>
       {cloneElement(children, {
@@ -172,16 +179,13 @@ export const Close: React.FC<CloseProps> = ({children}) => {
         'aria-label': children.props.hasOwnProperty('aria-label')
           ? children.props['aria-label']
           : 'Close',
-        onClick:
-          typeof children.props.onClick === 'function'
-            ? useCallback(
-                e => {
-                  close()
-                  children.props.onClick?.(e)
-                },
-                [children.props.onClick, close]
-              )
-            : close,
+        onClick: useCallback(
+          (e: MouseEvent) => {
+            close()
+            storedOnClick.current?.(e)
+          },
+          [close]
+        ),
       })}
     </Button>
   )
@@ -209,6 +213,8 @@ export const Trigger: React.FC<TriggerProps> = ({
     children.ref,
     useConditionalFocus(prevOpen.current && !isOpen, true)
   )
+  const storedOnClick = useRef(children.props.onClick)
+  storedOnClick.current = children.props.onClick
 
   useLayoutEffect(() => {
     prevOpen.current = isOpen
@@ -227,13 +233,13 @@ export const Trigger: React.FC<TriggerProps> = ({
           children.props.style,
           isOpen ? openStyle : closedStyle
         ),
-        onClick:
-          typeof children.props.onClick === 'function'
-            ? e => {
-                toggle()
-                children.props.onClick(e)
-              }
-            : toggle,
+        onClick: useCallback(
+          (e: MouseEvent) => {
+            toggle()
+            storedOnClick.current?.(e)
+          },
+          [toggle]
+        ),
         ref,
       })}
     </Button>
