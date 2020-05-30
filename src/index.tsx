@@ -179,7 +179,7 @@ export const Close: React.FC<CloseProps> = ({children}) => {
           : 'Close',
         onClick: (e: MouseEvent) => {
           close()
-          children.props.onClick.current?.(e)
+          children.props.onClick?.(e)
         },
       })}
     </Button>
