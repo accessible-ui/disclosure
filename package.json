@@ -1,9 +1,9 @@
 {
   "name": "@accessible/disclosure",
-  "version": "1.1.4",
-  "homepage": "https://github.com/accessible-ui/accessible#readme",
-  "repository": "github:accessible-ui/accessible",
-  "bugs": "https://github.com/accessible-ui/accessible/issues",
+  "version": "1.1.5",
+  "homepage": "https://github.com/accessible-ui/disclosure#readme",
+  "repository": "github:accessible-ui/disclosure",
+  "bugs": "https://github.com/accessible-ui/disclosure/issues",
   "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
   "description": "An accessible and versatile disclosure component for React",
