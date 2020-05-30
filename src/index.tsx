@@ -1,11 +1,4 @@
-import React, {
-  cloneElement,
-  useRef,
-  useMemo,
-  useCallback,
-  useEffect,
-  useContext,
-} from 'react'
+import * as React from 'react'
 import {useKeycodes} from '@accessible/use-keycode'
 import useConditionalFocus from '@accessible/use-conditional-focus'
 import useSwitch from '@react-hook/switch'
@@ -41,7 +34,8 @@ export const DisclosureContext = React.createContext<DisclosureContextValue>({
     toggle: noop,
   }),
   {Consumer: DisclosureConsumer} = DisclosureContext,
-  useDisclosure = () => useContext<DisclosureContextValue>(DisclosureContext),
+  useDisclosure = () =>
+    React.useContext<DisclosureContextValue>(DisclosureContext),
   useIsOpen = () => useDisclosure().isOpen,
   useControls = (): DisclosureControls => {
     const {open, close, toggle} = useDisclosure()
@@ -70,16 +64,17 @@ export const Disclosure: React.FC<DisclosureProps> = ({
 }) => {
   // eslint-disable-next-line prefer-const
   let [isOpen, toggle] = useSwitch(defaultOpen)
-  const prevOpen = useRef(isOpen)
-  const storedOnChange = useRef(onChange)
+  const prevOpen = React.useRef(isOpen)
+  const storedOnChange = React.useRef(onChange)
+  storedOnChange.current = onChange
   id = useId(id)
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isOpen !== prevOpen.current) storedOnChange.current?.(isOpen)
     prevOpen.current = isOpen
   }, [isOpen])
 
-  const context = useMemo(
+  const context = React.useMemo(
     () => ({
       id,
       open: toggle.on,
@@ -132,7 +127,7 @@ export const Target: React.FC<TargetProps> = ({
   children,
 }) => {
   const {id, isOpen, close} = useDisclosure()
-  const prevOpen = useRef<boolean>(isOpen)
+  const prevOpen = React.useRef<boolean>(isOpen)
   const ref = useMergedRef(
     // @ts-ignore
     children.ref,
@@ -150,7 +145,7 @@ export const Target: React.FC<TargetProps> = ({
   }, [isOpen])
 
   return portalize(
-    cloneElement(children, {
+    React.cloneElement(children, {
       'aria-hidden': `${!isOpen}`,
       id,
       className:
@@ -173,24 +168,19 @@ export interface CloseProps {
 
 export const Close: React.FC<CloseProps> = ({children}) => {
   const {close, isOpen, id} = useDisclosure()
-  const storedOnClick = useRef(children.props.onClick)
-  storedOnClick.current = children.props.onClick
 
   return (
     <Button>
-      {cloneElement(children, {
+      {React.cloneElement(children, {
         'aria-controls': id,
         'aria-expanded': String(isOpen),
         'aria-label': children.props.hasOwnProperty('aria-label')
           ? children.props['aria-label']
           : 'Close',
-        onClick: useCallback(
-          (e: MouseEvent) => {
-            close()
-            storedOnClick.current?.(e)
-          },
-          [close]
-        ),
+        onClick: (e: MouseEvent) => {
+          close()
+          children.props.onClick.current?.(e)
+        },
       })}
     </Button>
   )
@@ -212,14 +202,12 @@ export const Trigger: React.FC<TriggerProps> = ({
   children,
 }) => {
   const {isOpen, id, toggle} = useDisclosure()
-  const prevOpen = useRef<boolean>(isOpen)
+  const prevOpen = React.useRef<boolean>(isOpen)
   const ref = useMergedRef(
     // @ts-ignore
     children.ref,
     useConditionalFocus(prevOpen.current && !isOpen, {includeRoot: true})
   )
-  const storedOnClick = useRef(children.props.onClick)
-  storedOnClick.current = children.props.onClick
 
   useLayoutEffect(() => {
     prevOpen.current = isOpen
@@ -227,7 +215,7 @@ export const Trigger: React.FC<TriggerProps> = ({
 
   return (
     <Button>
-      {cloneElement(children, {
+      {React.cloneElement(children, {
         'aria-controls': id,
         'aria-expanded': String(isOpen),
         className:
@@ -238,13 +226,10 @@ export const Trigger: React.FC<TriggerProps> = ({
           children.props.style,
           isOpen ? openStyle : closedStyle
         ),
-        onClick: useCallback(
-          (e: MouseEvent) => {
-            toggle()
-            storedOnClick.current?.(e)
-          },
-          [toggle]
-        ),
+        onClick: (e: MouseEvent) => {
+          toggle()
+          children.props.onClick?.(e)
+        },
         ref,
       })}
     </Button>
