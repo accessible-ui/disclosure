@@ -216,7 +216,7 @@ export const Trigger: React.FC<TriggerProps> = ({
   const ref = useMergedRef(
     // @ts-ignore
     children.ref,
-    useConditionalFocus(prevOpen.current && !isOpen, true)
+    useConditionalFocus(prevOpen.current && !isOpen, {includeRoot: true})
   )
   const storedOnClick = useRef(children.props.onClick)
   storedOnClick.current = children.props.onClick
