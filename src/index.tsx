@@ -6,7 +6,7 @@ import useMergedRef from '@react-hook/merged-ref'
 import useLayoutEffect from '@react-hook/passive-layout-effect'
 import useId from '@accessible/use-id'
 import Button from '@accessible/button'
-import Portalize from 'react-portalize'
+import Portalize, {PortalizeProps} from 'react-portalize'
 import clsx from 'clsx'
 
 const __DEV__ =
@@ -99,7 +99,7 @@ const portalize = (
   portal: boolean | undefined | null | string | Record<any, any>
 ) => {
   if (portal === false || portal === void 0 || portal === null) return Component
-  const props: Record<string, any> = {children: Component}
+  const props: PortalizeProps = {children: Component}
   if (typeof portal === 'string') props.container = portal
   else Object.assign(props, portal)
   return React.createElement(Portalize, props)
