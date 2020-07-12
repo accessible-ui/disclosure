@@ -100,7 +100,7 @@ export function useA11yTarget<T extends HTMLElement>(
     id,
     className: isOpen ? openClass : closedClass,
     style: Object.assign(
-      {visibility: isOpen ? 'visible' : 'hidden'},
+      {visibility: isOpen ? 'visible' : 'hidden'} as const,
       isOpen ? openStyle : closedStyle
     ),
   } as const
