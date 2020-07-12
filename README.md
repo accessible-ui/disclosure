@@ -102,7 +102,7 @@ configuration options.
 | id          | `string`                  | `undefined` | No        | By default this component creates a unique id for you, as it is required for certain aria attributes. Supplying an id here overrides the auto id feature. |
 | children    | `React.ReactNode`         | `undefined` | No        | Your disclosure contents and any other children.                                                                                                          |
 
-### useTarget(target, options)
+### useTarget(target, options?)
 
 A React hook for creating a headless disclosure target to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
 
@@ -212,7 +212,7 @@ This component wraps any React element and turns it into a disclosure target.
 // </div>
 ```
 
-### useTrigger(target, options)
+### useTrigger(target, options?)
 
 A React hook for creating a headless disclosure trigger to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
 In addition to providing accessibility props to your component, this hook will add events
@@ -315,7 +315,7 @@ of the disclosure target.
 // </button>
 ```
 
-### useCloseButton(target, options)
+### useCloseButton(target, options?)
 
 A React hook for creating a headless close button to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
 In addition to providing accessibility props to your component, this hook will add events
