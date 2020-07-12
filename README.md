@@ -151,11 +151,11 @@ export interface UseA11yTargetOptions {
 
 ```ts
 interface A11yProps {
-  readonly 'aria-hidden': string
+  readonly 'aria-hidden': boolean
   readonly id: string | undefined
   readonly className: string | undefined
   readonly style: {
-    visibility: string
+    visibility: 'visible' | 'hidden'
   } & React.CSSProperties
 }
 ```
@@ -259,7 +259,7 @@ export interface UseA11yTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
 ```ts
 interface A11yProps<E extends React.MouseEvent<any, MouseEvent>> {
   readonly 'aria-controls': string | undefined
-  readonly 'aria-expanded': string
+  readonly 'aria-expanded': boolean
   readonly role: 'button'
   readonly tabIndex: 0
   readonly className: string | undefined
@@ -351,7 +351,7 @@ export interface UseA11yCloseButtonOptions<
 ```ts
 interface A11yProps<E extends React.MouseEvent<any, MouseEvent>> {
   readonly 'aria-controls': string | undefined
-  readonly 'aria-expanded': string
+  readonly 'aria-expanded': boolean
   readonly 'aria-label': 'Close'
   readonly role: 'button'
   readonly tabIndex: 0
