@@ -24,9 +24,9 @@ export declare namespace Disclosure {
  * @param target A React ref or HTML element
  * @param options Configuration options
  */
-export declare function useTarget<T extends HTMLElement>(
+export declare function useA11yTarget<T extends HTMLElement>(
   target: React.RefObject<T> | T | null,
-  options?: UseTargetOptions
+  options?: UseA11yTargetOptions
 ): {
   readonly 'aria-hidden': string
   readonly id: string | undefined
@@ -73,12 +73,12 @@ export declare namespace Target {
  * @param target A React ref or HTML element
  * @param options Configuration options
  */
-export declare function useCloseButton<
+export declare function useA11yCloseButton<
   T extends HTMLElement,
   E extends React.MouseEvent<T, MouseEvent>
 >(
   target: React.RefObject<T> | T | null,
-  {onClick}?: UseCloseButtonOptions<E>
+  {onClick}?: UseA11yCloseButtonOptions<E>
 ): {
   readonly 'aria-controls': string | undefined
   readonly 'aria-expanded': string
@@ -117,12 +117,12 @@ export declare namespace CloseButton {
  * @param target A React ref or HTML element
  * @param options Configuration options
  */
-export declare function useTrigger<
+export declare function useA11yTrigger<
   T extends HTMLElement,
   E extends React.MouseEvent<T, MouseEvent>
 >(
   target: React.RefObject<T> | T | null,
-  options?: UseTriggerOptions<E>
+  options?: UseA11yTriggerOptions<E>
 ): {
   readonly 'aria-controls': string | undefined
   readonly 'aria-expanded': string
@@ -206,7 +206,7 @@ export interface DisclosureProps {
    */
   children: React.ReactNode
 }
-export interface UseTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
+export interface UseA11yTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
   /**
    * Adds this class name to props when the disclosure is open
    */
@@ -229,14 +229,15 @@ export interface UseTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
    */
   onClick?: (e: E) => any
 }
-export interface TriggerProps extends Omit<UseTriggerOptions<any>, 'onClick'> {
+export interface TriggerProps
+  extends Omit<UseA11yTriggerOptions<any>, 'onClick'> {
   /**
    * The child is cloned by this component and has aria attributes injected
    * into its props as well as the events defined above.
    */
   children: JSX.Element | React.ReactElement
 }
-export interface UseTargetOptions {
+export interface UseA11yTargetOptions {
   /**
    * Adds this class name to props when the disclosure is open
    */
@@ -265,7 +266,7 @@ export interface UseTargetOptions {
    */
   closeOnEscape?: boolean
 }
-export interface TargetProps extends UseTargetOptions {
+export interface TargetProps extends UseA11yTargetOptions {
   /**
    * When `true` this will render the disclosure into a React portal with the
    * id `#portals`. You can render it into any portal by providing its query
@@ -284,7 +285,9 @@ export interface TargetProps extends UseTargetOptions {
    */
   children: JSX.Element | React.ReactElement
 }
-export interface UseCloseButtonOptions<E = React.MouseEvent<any, MouseEvent>> {
+export interface UseA11yCloseButtonOptions<
+  E = React.MouseEvent<any, MouseEvent>
+> {
   /**
    * Adds an onClick handler in addition to the default one that
    * closes the disclosure.
