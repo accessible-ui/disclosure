@@ -42,7 +42,7 @@ An accessible and versatile disclosure component for React
 
 ## Quick Start
 
-[Check out the example on CodeSandbox](https://codesandbox.io/s/accessibledisclosure-example-8pkd2)
+[Check out the example on **CodeSandbox**](https://codesandbox.io/s/accessibledisclosure-example-8pkd2)
 
 ```jsx harmony
 import * as React from 'react'
