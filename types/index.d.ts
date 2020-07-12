@@ -227,6 +227,10 @@ export interface UseTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
   onClick?: (e: E) => any
 }
 export interface TriggerProps extends Omit<UseTriggerOptions<any>, 'onClick'> {
+  /**
+   * The child is cloned by this component and has aria attributes injected
+   * into its props as well as the events defined above.
+   */
   children: JSX.Element | React.ReactElement
 }
 export interface UseTargetOptions {
