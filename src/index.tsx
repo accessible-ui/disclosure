@@ -17,6 +17,9 @@ const DisclosureContext = React.createContext<DisclosureContextValue>({
   toggle: noop,
 })
 
+/**
+ * This hook provides the current value of the disclosure's context object
+ */
 export function useDisclosure() {
   return React.useContext(DisclosureContext)
 }
