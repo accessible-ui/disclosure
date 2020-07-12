@@ -80,12 +80,12 @@ const Component = () => (
 
 ### Hooks
 
-| Hook                                               | Description                                                                                                                                                                      |
-| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`useDisclosure()`](#usedisclosure)                | This hook provides the value of the disclosure's [DisclosureContextValue object](#disclosurecontextvalue).                                                                       |
-| [`useTarget()`](#usetargettarget-options)          | A React hook for creating a headless disclosure target to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).  |
-| [`useTrigger()`](#usetriggertarget-options)        | A React hook for creating a headless disclosure trigger to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html). |
-| [`useCloseButton()`](#useclosebuttontarget-ptions) | A React hook for creating a headless close button to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).       |
+| Hook                                                | Description                                                                                                                                                                      |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`useDisclosure()`](#usedisclosure)                 | This hook provides the value of the disclosure's [DisclosureContextValue object](#disclosurecontextvalue).                                                                       |
+| [`useTarget()`](#usetargettarget-options)           | A React hook for creating a headless disclosure target to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).  |
+| [`useTrigger()`](#usetriggertarget-options)         | A React hook for creating a headless disclosure trigger to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html). |
+| [`useCloseButton()`](#useclosebuttontarget-options) | A React hook for creating a headless close button to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).       |
 
 ### &lt;Disclosure&gt;
 
