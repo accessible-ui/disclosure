@@ -28,11 +28,11 @@ export declare function useA11yTarget<T extends HTMLElement>(
   target: React.RefObject<T> | T | null,
   options?: UseA11yTargetOptions
 ): {
-  readonly 'aria-hidden': string
+  readonly 'aria-hidden': boolean
   readonly id: string | undefined
   readonly className: string | undefined
   readonly style: {
-    visibility: string
+    readonly visibility: 'hidden' | 'visible'
   } & React.CSSProperties
 }
 /**
@@ -81,7 +81,7 @@ export declare function useA11yCloseButton<
   {onClick}?: UseA11yCloseButtonOptions<E>
 ): {
   readonly 'aria-controls': string | undefined
-  readonly 'aria-expanded': string
+  readonly 'aria-expanded': boolean
   readonly 'aria-label': 'Close'
 } & {
   readonly onClick: (event: E) => void
@@ -125,7 +125,7 @@ export declare function useA11yTrigger<
   options?: UseA11yTriggerOptions<E>
 ): {
   readonly 'aria-controls': string | undefined
-  readonly 'aria-expanded': string
+  readonly 'aria-expanded': boolean
   readonly className: string | undefined
   readonly style: React.CSSProperties | undefined
 } & {

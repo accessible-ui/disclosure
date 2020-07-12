@@ -96,7 +96,7 @@ export function useA11yTarget<T extends HTMLElement>(
   useKey(target, {Escape: () => closeOnEscape && close()})
 
   return {
-    'aria-hidden': `${!isOpen}`,
+    'aria-hidden': !isOpen,
     id,
     className: isOpen ? openClass : closedClass,
     style: Object.assign(
@@ -170,7 +170,7 @@ export function useA11yCloseButton<
   return Object.assign(
     {
       'aria-controls': id,
-      'aria-expanded': String(isOpen),
+      'aria-expanded': isOpen,
       'aria-label': 'Close',
     } as const,
     useA11yButton<T, E>(target, (e) => {
@@ -230,7 +230,7 @@ export function useA11yTrigger<
   return Object.assign(
     {
       'aria-controls': id,
-      'aria-expanded': String(isOpen),
+      'aria-expanded': isOpen,
       className: isOpen ? openClass : closedClass,
       style: isOpen ? openStyle : closedStyle,
     } as const,
