@@ -1,21 +1,14 @@
 /* jest */
 import * as React from 'react'
 import {renderHook} from '@testing-library/react-hooks'
-import {render, fireEvent} from '@testing-library/react'
-import {
-  Disclosure,
-  Trigger,
-  Target,
-  Close,
-  useControls,
-  useIsOpen,
-  useDisclosure,
-} from './index'
+import {render, fireEvent, screen} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import {Disclosure, Trigger, Target, CloseButton, useDisclosure} from './index'
 
 describe('<Disclosure>', () => {
   it('should have a custom id', () => {
-    const result = render(
-      <Disclosure id="foobar">
+    render(
+      <Disclosure id='foobar'>
         <Target>
           <div>Hello world</div>
         </Target>
@@ -26,48 +19,31 @@ describe('<Disclosure>', () => {
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot()
-  })
-
-  it('should provide context to function child', () => {
-    let cxt
-
-    render(
-      <Disclosure>
-        {(context) => {
-          cxt = context
-          return <div />
-        }}
-      </Disclosure>
-    )
-
-    expect(cxt).toMatchSnapshot()
+    expect(screen.getByText('Hello world')).toHaveAttribute('id', 'foobar')
   })
 
   it('should invoke onChange callback when open state changes', () => {
     const handleChange = jest.fn()
 
-    const {getByTestId} = render(
+    render(
       <Disclosure onChange={handleChange}>
         <Trigger>
-          <button data-testid="btn">open me</button>
+          <button data-testid='btn'>open me</button>
         </Trigger>
       </Disclosure>
     )
 
     expect(handleChange).not.toBeCalled()
-    fireEvent.mouseDown(getByTestId('btn'))
-    fireEvent.click(getByTestId('btn'))
-    expect(handleChange).toBeCalledWith(true)
-    fireEvent.mouseDown(getByTestId('btn'))
-    fireEvent.click(getByTestId('btn'))
-    expect(handleChange).toBeCalledWith(false)
+    userEvent.click(screen.getByRole('button'))
+    expect(handleChange).toBeCalledWith(true, false)
+    userEvent.click(screen.getByRole('button'))
+    expect(handleChange).toBeCalledWith(false, true)
   })
 })
 
 describe('<Target>', () => {
   it('should open and close on Trigger click', () => {
-    const result = render(
+    render(
       <Disclosure>
         <Target>
           <div>Hello world</div>
@@ -79,141 +55,35 @@ describe('<Target>', () => {
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot('closed initially')
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('closed')
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'true'
+    )
+    expect(screen.getByText('Hello world')).toHaveStyle({
+      visibility: 'hidden',
+    })
+
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    )
+    expect(screen.getByText('Hello world')).toHaveStyle({
+      visibility: 'visible',
+    })
+
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'true'
+    )
+    expect(screen.getByText('Hello world')).toHaveStyle({
+      visibility: 'hidden',
+    })
   })
 
   it('should close on escape key', () => {
-    const result = render(
-      <Disclosure>
-        <Target>
-          <div>Hello world</div>
-        </Target>
-
-        <Trigger>
-          <button>open me</button>
-        </Trigger>
-      </Disclosure>
-    )
-
-    expect(result.asFragment()).toMatchSnapshot('closed initially')
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.keyDown(result.getByText('Hello world'), {
-      key: 'Escape',
-      which: 27,
-    })
-    expect(result.asFragment()).toMatchSnapshot('closed')
-  })
-
-  it(`shouldn't close on escape key if prop is false`, () => {
-    const result = render(
-      <Disclosure>
-        <Target closeOnEscape={false}>
-          <div>Hello world</div>
-        </Target>
-
-        <Trigger>
-          <button>open me</button>
-        </Trigger>
-      </Disclosure>
-    )
-
-    expect(result.asFragment()).toMatchSnapshot('closed initially')
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
-    fireEvent.keyDown(result.getByText('Hello world'), {
-      key: 'Escape',
-      code: 27,
-    })
-    expect(result.asFragment()).toMatchSnapshot('still open')
-  })
-
-  it(`should assign to custom styles when opened or closed`, () => {
-    const result = render(
-      <Disclosure>
-        <Target>
-          <div style={{fontSize: '2rem'}}>Hello world</div>
-        </Target>
-
-        <Trigger>
-          <button>open me</button>
-        </Trigger>
-      </Disclosure>
-    )
-
-    expect(result.asFragment()).toMatchSnapshot()
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
-  })
-
-  it(`should apply custom classname when opened or closed`, () => {
-    const result = render(
-      <Disclosure>
-        <Target>
-          <div className="custom">Hello world</div>
-        </Target>
-
-        <Trigger>
-          <button>open me</button>
-        </Trigger>
-      </Disclosure>
-    )
-
-    expect(result.asFragment()).toMatchSnapshot()
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
-  })
-
-  it(`should apply user defined openClass and closedClass`, () => {
-    const result = render(
-      <Disclosure>
-        <Target closedClass="closed" openClass="open">
-          <div>Hello world</div>
-        </Target>
-
-        <Trigger>
-          <button>open me</button>
-        </Trigger>
-      </Disclosure>
-    )
-
-    expect(result.asFragment()).toMatchSnapshot()
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
-  })
-
-  it(`should apply user defined openStyle and closedStyle`, () => {
-    const result = render(
-      <Disclosure>
-        <Target closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
-          <div>Hello world</div>
-        </Target>
-
-        <Trigger>
-          <button>open me</button>
-        </Trigger>
-      </Disclosure>
-    )
-
-    expect(result.asFragment()).toMatchSnapshot()
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
-  })
-
-  it(`should be initially open when defined as such`, () => {
-    const result = render(
+    render(
       <Disclosure defaultOpen>
         <Target>
           <div>Hello world</div>
@@ -225,10 +95,137 @@ describe('<Target>', () => {
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot('initially open')
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('closed')
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    )
+
+    fireEvent.keyDown(screen.getByText('Hello world'), {
+      key: 'Escape',
+      which: 27,
+    })
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'true'
+    )
+  })
+
+  it(`shouldn't close on escape key if prop is false`, () => {
+    render(
+      <Disclosure defaultOpen>
+        <Target closeOnEscape={false}>
+          <div>Hello world</div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    fireEvent.keyDown(screen.getByText('Hello world'), {
+      key: 'Escape',
+      code: 27,
+    })
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    )
+  })
+
+  it(`should assign to custom styles when opened or closed`, () => {
+    render(
+      <Disclosure>
+        <Target>
+          <div style={{fontSize: '2rem'}}>Hello world</div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByText('Hello world')).toHaveStyle({fontSize: '2rem'})
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world')).toHaveStyle({fontSize: '2rem'})
+  })
+
+  it(`should apply custom classname when opened or closed`, () => {
+    render(
+      <Disclosure>
+        <Target>
+          <div className='custom'>Hello world</div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByText('Hello world')).toHaveClass('custom')
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world')).toHaveClass('custom')
+  })
+
+  it(`should apply user defined openClass and closedClass`, () => {
+    render(
+      <Disclosure>
+        <Target closedClass='closed' openClass='open'>
+          <div>Hello world</div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByText('Hello world')).toHaveClass('closed')
+    expect(screen.getByText('Hello world')).not.toHaveClass('open')
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world')).not.toHaveClass('closed')
+    expect(screen.getByText('Hello world')).toHaveClass('open')
+  })
+
+  it(`should apply user defined openStyle and closedStyle`, () => {
+    render(
+      <Disclosure>
+        <Target closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
+          <div>Hello world</div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByText('Hello world')).toHaveStyle({display: 'none'})
+    expect(screen.getByText('Hello world')).not.toHaveStyle({display: 'block'})
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world')).not.toHaveStyle({display: 'none'})
+    expect(screen.getByText('Hello world')).toHaveStyle({display: 'block'})
+  })
+
+  it(`should be initially open when defined as such`, () => {
+    render(
+      <Disclosure defaultOpen>
+        <Target>
+          <div>Hello world</div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    )
   })
 
   it(`should act like a controlled component when 'open' prop is specified`, () => {
@@ -244,10 +241,16 @@ describe('<Target>', () => {
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot('initially open')
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('still open')
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    )
+
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'false'
+    )
 
     result.rerender(
       <Disclosure open={false}>
@@ -261,10 +264,10 @@ describe('<Target>', () => {
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot('closed')
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('still closed')
+    expect(screen.getByText('Hello world')).toHaveAttribute(
+      'aria-hidden',
+      'true'
+    )
   })
 
   it('should render into a portal by default ID', () => {
@@ -272,7 +275,7 @@ describe('<Target>', () => {
     portalRoot.setAttribute('id', 'portals')
     document.body.appendChild(portalRoot)
 
-    const result = render(
+    render(
       <Disclosure open>
         <Target portal>
           <div>Hello world</div>
@@ -284,9 +287,11 @@ describe('<Target>', () => {
       </Disclosure>
     )
 
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.baseElement).toMatchSnapshot()
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world').parentNode).toHaveAttribute(
+      'id',
+      'portals'
+    )
     document.body.removeChild(portalRoot)
   })
 
@@ -295,7 +300,7 @@ describe('<Target>', () => {
     portalRoot.setAttribute('class', 'portals')
     document.body.appendChild(portalRoot)
 
-    const result = render(
+    render(
       <Disclosure open>
         <Target portal={{container: '.portals'}}>
           <div>Hello world</div>
@@ -307,9 +312,8 @@ describe('<Target>', () => {
       </Disclosure>
     )
 
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.baseElement).toMatchSnapshot()
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world').parentNode).toHaveClass('portals')
     document.body.removeChild(portalRoot)
   })
 
@@ -318,9 +322,9 @@ describe('<Target>', () => {
     portalRoot.setAttribute('class', 'portals')
     document.body.appendChild(portalRoot)
 
-    const result = render(
+    render(
       <Disclosure open>
-        <Target portal=".portals">
+        <Target portal='.portals'>
           <div>Hello world</div>
         </Target>
 
@@ -330,168 +334,242 @@ describe('<Target>', () => {
       </Disclosure>
     )
 
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.baseElement).toMatchSnapshot()
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByText('Hello world').parentNode).toHaveClass('portals')
     document.body.removeChild(portalRoot)
   })
 })
 
 describe('<Trigger>', () => {
-  it('should have openClass and closedClass', () => {
-    const result = render(
-      <Disclosure>
+  it('should have correct aria-controls prop', () => {
+    render(
+      <Disclosure id='test'>
         <Target>
           <div>Hello world</div>
         </Target>
 
-        <Trigger closedClass="closed" openClass="open">
+        <Trigger>
           <button>open me</button>
         </Trigger>
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot()
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
+    expect(screen.getByRole('button')).toHaveAttribute('aria-controls', 'test')
+  })
+
+  it('should have correct aria-expanded prop', () => {
+    render(
+      <Disclosure>
+        <Target>
+          <div>Hello world</div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false')
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('should have openClass and closedClass', () => {
+    render(
+      <Disclosure>
+        <Target>
+          <div>Hello world</div>
+        </Target>
+
+        <Trigger closedClass='closed' openClass='open'>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByRole('button')).toHaveClass('closed')
+    expect(screen.getByRole('button')).not.toHaveClass('open')
+    userEvent.click(screen.getByRole('button'))
+    expect(screen.getByRole('button')).not.toHaveClass('closed')
+    expect(screen.getByRole('button')).toHaveClass('open')
   })
 
   it('should have openStyle and closedStyle', () => {
-    const result = render(
+    render(
       <Disclosure>
         <Target>
           <div>Hello world</div>
         </Target>
 
-        <Trigger closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
+        <Trigger closedStyle={{display: 'flex'}} openStyle={{display: 'block'}}>
           <button>open me</button>
         </Trigger>
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot()
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
-    expect(result.asFragment()).toMatchSnapshot('open')
+    expect(screen.getByRole('button')).toHaveStyle({display: 'flex'})
+    expect(screen.getByRole('button')).not.toHaveStyle({display: 'block'})
+    userEvent.click(screen.getByText('open me'))
+    expect(screen.getByRole('button')).not.toHaveStyle({display: 'flex'})
+    expect(screen.getByRole('button')).toHaveStyle({display: 'block'})
   })
 
   it('should fire user-defined onClick handler', () => {
     const cb = jest.fn()
-    const result = render(
+    render(
       <Disclosure>
         <Target>
           <div>Hello world</div>
         </Target>
 
-        <Trigger closedStyle={{display: 'none'}} openStyle={{display: 'block'}}>
+        <Trigger>
           <button onClick={cb}>open me</button>
         </Trigger>
       </Disclosure>
     )
 
-    fireEvent.click(result.getByText('open me'))
-    expect(cb).toBeCalledTimes(0)
-    fireEvent.mouseDown(result.getByText('open me'))
-    fireEvent.click(result.getByText('open me'))
+    userEvent.click(screen.getByRole('button'))
     expect(cb).toBeCalledTimes(1)
   })
 })
 
-describe('<Close>', () => {
-  it('should override the aria label', () => {
-    const result = render(
-      <Disclosure defaultOpen={true}>
+describe('<CloseButton>', () => {
+  it('should have correct aria-controls prop', () => {
+    render(
+      <Disclosure id='test'>
         <Target>
           <div>
-            <Close>
-              <button data-testid="close" aria-label="close me">
+            <CloseButton>
+              <button data-testid='close' aria-label='close me'>
                 Close me
               </button>
-            </Close>
-            Hello world
-          </div>
-        </Target>
-      </Disclosure>
-    )
-
-    expect(result.asFragment()).toMatchSnapshot('aria-label="close me"')
-  })
-
-  it('should close the modal', () => {
-    const result = render(
-      <Disclosure defaultOpen={true}>
-        <Target>
-          <div>
-            <Close>
-              <button data-testid="close">Close me</button>
-            </Close>
+            </CloseButton>
             Hello world
           </div>
         </Target>
 
-        <Trigger closedClass="closed" openClass="open">
+        <Trigger>
           <button>open me</button>
         </Trigger>
       </Disclosure>
     )
 
-    expect(result.asFragment()).toMatchSnapshot()
-    fireEvent.mouseDown(result.getByTestId('close'))
-    fireEvent.click(result.getByTestId('close'))
-    expect(result.asFragment()).toMatchSnapshot('closed')
+    expect(screen.getByText('Close me')).toHaveAttribute(
+      'aria-controls',
+      'test'
+    )
+  })
+
+  it('should have correct aria-expanded prop', () => {
+    render(
+      <Disclosure defaultOpen>
+        <Target>
+          <div>
+            <CloseButton>
+              <button data-testid='close' aria-label='close me'>
+                Close me
+              </button>
+            </CloseButton>
+            Hello world
+          </div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByText('open me')).toHaveAttribute('aria-expanded', 'true')
+    userEvent.click(screen.getByTestId('close'))
+    expect(screen.getByText('open me')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    )
+  })
+
+  it('should override the aria label', () => {
+    render(
+      <Disclosure defaultOpen={true}>
+        <Target>
+          <div>
+            <CloseButton>
+              <button data-testid='close' aria-label='close me'>
+                Close me
+              </button>
+            </CloseButton>
+            Hello world
+          </div>
+        </Target>
+      </Disclosure>
+    )
+
+    expect(screen.getByText('Close me')).toHaveAttribute(
+      'aria-label',
+      'close me'
+    )
+  })
+
+  it('should close the target', () => {
+    render(
+      <Disclosure defaultOpen>
+        <Target>
+          <div data-testid='target'>
+            <CloseButton>
+              <button data-testid='close'>Close me</button>
+            </CloseButton>
+            Hello world
+          </div>
+        </Target>
+
+        <Trigger>
+          <button>open me</button>
+        </Trigger>
+      </Disclosure>
+    )
+
+    expect(screen.getByTestId('target')).toHaveAttribute('aria-hidden', 'false')
+    userEvent.click(screen.getByTestId('close'))
+    expect(screen.getByTestId('target')).toHaveAttribute('aria-hidden', 'true')
   })
 
   it('should fire user-defined onClick handler', () => {
     const cb = jest.fn()
-    const result = render(
+    render(
       <Disclosure defaultOpen={true}>
         <Target>
           <div>
-            <Close>
-              <button onClick={cb} data-testid="close">
+            <CloseButton>
+              <button onClick={cb} data-testid='close'>
                 Close me
               </button>
-            </Close>
+            </CloseButton>
             Hello world
           </div>
         </Target>
 
-        <Trigger closedClass="closed" openClass="open">
+        <Trigger closedClass='closed' openClass='open'>
           <button>open me</button>
         </Trigger>
       </Disclosure>
     )
 
-    fireEvent.click(result.getByTestId('close'))
-    expect(cb).toBeCalledTimes(0)
-    fireEvent.mouseDown(result.getByTestId('close'))
-    fireEvent.click(result.getByTestId('close'))
+    userEvent.click(screen.getByTestId('close'))
     expect(cb).toBeCalledTimes(1)
-  })
-})
-
-describe('useControls()', () => {
-  it('should have toggle, open, close keys', () => {
-    const {result} = renderHook(() => useControls(), {wrapper: Disclosure})
-    expect(Object.keys(result.current)).toStrictEqual([
-      'open',
-      'close',
-      'toggle',
-    ])
-  })
-})
-
-describe('useIsOpen()', () => {
-  it('should return boolean', () => {
-    const {result} = renderHook(() => useIsOpen(), {wrapper: Disclosure})
-    expect(typeof result.current).toBe('boolean')
   })
 })
 
 describe('useDisclosure()', () => {
   it('should return context', () => {
     const {result} = renderHook(() => useDisclosure(), {wrapper: Disclosure})
-    expect(result.current).toMatchSnapshot()
+    expect(typeof result.current.close).toBe('function')
+    expect(typeof result.current.open).toBe('function')
+    expect(typeof result.current.toggle).toBe('function')
+    expect(typeof result.current.isOpen).toBe('boolean')
+    expect(typeof result.current.id).toBe('string')
+    expect(Object.keys(result.current).sort()).toEqual(
+      ['close', 'open', 'toggle', 'isOpen', 'id'].sort()
+    )
   })
 })

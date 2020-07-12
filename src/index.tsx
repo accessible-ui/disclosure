@@ -1,78 +1,39 @@
 import * as React from 'react'
-import {useKeycodes} from '@accessible/use-keycode'
+import useKey from '@accessible/use-key'
 import useConditionalFocus from '@accessible/use-conditional-focus'
 import useSwitch from '@react-hook/switch'
 import useMergedRef from '@react-hook/merged-ref'
-import useLayoutEffect from '@react-hook/passive-layout-effect'
+import usePrevious from '@react-hook/previous'
 import useId from '@accessible/use-id'
-import Button from '@accessible/button'
-import Portalize, {PortalizeProps} from 'react-portalize'
+import {useA11yButton} from '@accessible/button'
+import Portalize from 'react-portalize'
+import type {PortalizeProps} from 'react-portalize'
 import clsx from 'clsx'
 
-const __DEV__ =
-  typeof process !== 'undefined' && process.env.NODE_ENV !== 'production'
+const DisclosureContext = React.createContext<DisclosureContextValue>({
+  isOpen: false,
+  open: noop,
+  close: noop,
+  toggle: noop,
+})
 
-export interface DisclosureContextValue {
-  isOpen: boolean
-  open: () => void
-  close: () => void
-  toggle: () => void
-  id?: string
+export function useDisclosure() {
+  return React.useContext(DisclosureContext)
 }
 
-export interface DisclosureControls {
-  open: () => void
-  close: () => void
-  toggle: () => void
-}
-
-const noop = () => {}
-export const DisclosureContext = React.createContext<DisclosureContextValue>({
-    isOpen: false,
-    open: noop,
-    close: noop,
-    toggle: noop,
-  }),
-  {Consumer: DisclosureConsumer} = DisclosureContext,
-  useDisclosure = () =>
-    React.useContext<DisclosureContextValue>(DisclosureContext),
-  useIsOpen = () => useDisclosure().isOpen,
-  useControls = (): DisclosureControls => {
-    const {open, close, toggle} = useDisclosure()
-    return {open, close, toggle}
-  }
-
-export interface DisclosureProps {
-  open?: boolean
-  defaultOpen?: boolean
-  id?: string
-  onChange?: (open: boolean) => void
-  children:
-    | React.ReactNode
-    | React.ReactNode[]
-    | JSX.Element[]
-    | JSX.Element
-    | ((context: DisclosureContextValue) => React.ReactNode)
-}
-
-export const Disclosure: React.FC<DisclosureProps> = ({
+/**
+ * This component creates the context for your disclosure target and trigger
+ * and contains some configuration options.
+ */
+export function Disclosure({
   id,
   open,
   defaultOpen,
-  onChange,
+  onChange = noop,
   children,
-}) => {
-  // eslint-disable-next-line prefer-const
-  let [isOpen, toggle] = useSwitch(defaultOpen)
-  const prevOpen = React.useRef(isOpen)
-  const storedOnChange = React.useRef(onChange)
-  storedOnChange.current = onChange
+}: DisclosureProps) {
   id = useId(id)
-
-  React.useEffect(() => {
-    if (isOpen !== prevOpen.current) storedOnChange.current?.(isOpen)
-    prevOpen.current = isOpen
-  }, [isOpen])
+  const [isOpen, toggle] = useSwitch(defaultOpen, open, onChange)
 
   const context = React.useMemo(
     () => ({
@@ -80,43 +41,73 @@ export const Disclosure: React.FC<DisclosureProps> = ({
       open: toggle.on,
       close: toggle.off,
       toggle,
-      isOpen: open === void 0 || open === null ? isOpen : open,
+      isOpen,
     }),
-    [id, open, isOpen, toggle]
+    [id, isOpen, toggle]
   )
 
   return (
-    <DisclosureContext.Provider
-      value={context}
-      // @ts-ignore
-      children={typeof children === 'function' ? children(context) : children}
-    />
+    <DisclosureContext.Provider value={context}>
+      {children}
+    </DisclosureContext.Provider>
   )
 }
 
-const portalize = (
+function portalize(
   Component: React.ReactElement,
-  portal: boolean | undefined | null | string | Record<any, any>
-) => {
-  if (portal === false || portal === void 0 || portal === null) return Component
+  portal: boolean | undefined | null | string | Omit<PortalizeProps, 'children'>
+) {
+  if (!portal) return Component
   const props: PortalizeProps = {children: Component}
   if (typeof portal === 'string') props.container = portal
   else Object.assign(props, portal)
   return React.createElement(Portalize, props)
 }
 
-export interface TargetProps {
-  portal?: boolean | undefined | null | string | Record<any, any>
-  closeOnEscape?: boolean
-  openClass?: string
-  closedClass?: string
-  openStyle?: React.CSSProperties
-  closedStyle?: React.CSSProperties
-  preventScroll?: boolean
-  children: JSX.Element | React.ReactElement
+/**
+ * A React hook for creating a headless disclosure target to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
+ *
+ * @param target A React ref or HTML element
+ * @param options Configuration options
+ */
+export function useTarget<T extends HTMLElement>(
+  target: React.RefObject<T> | T | null,
+  options: UseTargetOptions = {}
+) {
+  const {
+    preventScroll,
+    closeOnEscape = true,
+    openClass,
+    closedClass,
+    openStyle,
+    closedStyle,
+  } = options
+  const {id, isOpen, close} = useDisclosure()
+  const prevOpen = usePrevious(isOpen)
+  // Provides the target focus when it is in a new open state
+  useConditionalFocus(target, !prevOpen && isOpen, {
+    includeRoot: true,
+    preventScroll,
+  })
+  // Handles closing the modal when the ESC key is pressed
+  useKey(target, {Escape: () => closeOnEscape && close()})
+
+  return {
+    'aria-hidden': `${!isOpen}`,
+    id,
+    className: isOpen ? openClass : closedClass,
+    style: Object.assign(
+      {visibility: isOpen ? 'visible' : 'hidden'},
+      isOpen ? openStyle : closedStyle
+    ),
+  } as const
 }
 
-export const Target: React.FC<TargetProps> = ({
+/**
+ * This component wraps any React element and turns it into a
+ * disclosure target.
+ */
+export function Target({
   closeOnEscape = true,
   portal,
   openClass,
@@ -125,121 +116,321 @@ export const Target: React.FC<TargetProps> = ({
   closedStyle,
   preventScroll,
   children,
-}) => {
-  const {id, isOpen, close} = useDisclosure()
-  const prevOpen = React.useRef<boolean>(isOpen)
-  const ref = useMergedRef(
-    // @ts-ignore
-    children.ref,
-    // provides the target focus when it is in a new open state
-    useConditionalFocus(!prevOpen.current && isOpen, {
-      includeRoot: true,
-      preventScroll,
-    }),
-    // handles closing the modal when the ESC key is pressed
-    useKeycodes({27: () => closeOnEscape && close()})
-  )
-
-  useLayoutEffect(() => {
-    prevOpen.current = isOpen
-  }, [isOpen])
+}: TargetProps) {
+  const ref = React.useRef<HTMLElement>(null)
+  const childProps = children.props
+  const a11yProps = useTarget(ref, {
+    openClass: clsx(childProps.className, openClass) || void 0,
+    closedClass: clsx(childProps.className, closedClass) || void 0,
+    openStyle: childProps.style
+      ? Object.assign({}, childProps.style, openStyle)
+      : openStyle,
+    closedStyle: childProps.style
+      ? Object.assign({}, childProps.style, closedStyle)
+      : closedStyle,
+    closeOnEscape,
+    preventScroll,
+  })
 
   return portalize(
-    React.cloneElement(children, {
-      'aria-hidden': `${!isOpen}`,
-      id,
-      className:
-        clsx(children.props.className, isOpen ? openClass : closedClass) ||
-        void 0,
-      style: Object.assign(
-        {visibility: isOpen ? 'visible' : 'hidden'},
-        children.props.style,
-        isOpen ? openStyle : closedStyle
-      ),
-      ref,
-    }),
+    React.cloneElement(
+      children,
+      Object.assign(a11yProps, {
+        ref: useMergedRef(
+          ref,
+          // @ts-expect-error
+          children.ref
+        ),
+      })
+    ),
     portal
   )
 }
 
-export interface CloseProps {
-  children: JSX.Element | React.ReactElement
-}
-
-export const Close: React.FC<CloseProps> = ({children}) => {
+/**
+ * A React hook for creating a headless close button to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
+ * In addition to providing accessibility props to your component, this
+ * hook will add events for interoperability between actual <button> elements
+ * and fake ones e.g. <a> and <div> to the target element.
+ *
+ * @param target A React ref or HTML element
+ * @param options Configuration options
+ */
+export function useCloseButton<
+  T extends HTMLElement,
+  E extends React.MouseEvent<T, MouseEvent>
+>(
+  target: React.RefObject<T> | T | null,
+  {onClick}: UseCloseButtonOptions<E> = {}
+) {
   const {close, isOpen, id} = useDisclosure()
-
-  return (
-    <Button>
-      {React.cloneElement(children, {
-        'aria-controls': id,
-        'aria-expanded': String(isOpen),
-        'aria-label': children.props.hasOwnProperty('aria-label')
-          ? children.props['aria-label']
-          : 'Close',
-        onClick: (e: MouseEvent) => {
-          close()
-          children.props.onClick?.(e)
-        },
-      })}
-    </Button>
+  return Object.assign(
+    {
+      'aria-controls': id,
+      'aria-expanded': String(isOpen),
+      'aria-label': 'Close',
+    } as const,
+    useA11yButton<T, E>(target, (e) => {
+      close()
+      onClick?.(e)
+    })
   )
 }
 
-export interface TriggerProps {
-  openClass?: string
-  closedClass?: string
-  openStyle?: React.CSSProperties
-  closedStyle?: React.CSSProperties
-  children: JSX.Element | React.ReactElement
+/**
+ * This is a convenience component that wraps any React element and adds
+ * an onClick handler which closes the disclosure.
+ */
+export function CloseButton({children}: CloseButtonProps) {
+  const ref = React.useRef<HTMLElement>(null)
+  const childProps = children.props
+  const a11yProps = useCloseButton(ref, {
+    onClick: childProps.onClick,
+  })
+
+  return React.cloneElement(
+    children,
+    Object.assign(a11yProps, {
+      'aria-label': childProps.hasOwnProperty('aria-label')
+        ? childProps['aria-label']
+        : a11yProps['aria-label'],
+      ref: useMergedRef(
+        ref,
+        // @ts-expect-error
+        children.ref
+      ),
+    })
+  )
 }
 
-export const Trigger: React.FC<TriggerProps> = ({
+/**
+ * A React hook for creating a headless disclosure trigger to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
+ * In addition to providing accessibility props to your component, this
+ * hook will add events for interoperability between actual <button> elements
+ * and fake ones e.g. <a> and <div> to the target element
+ *
+ * @param target A React ref or HTML element
+ * @param options Configuration options
+ */
+export function useTrigger<
+  T extends HTMLElement,
+  E extends React.MouseEvent<T, MouseEvent>
+>(target: React.RefObject<T> | T | null, options: UseTriggerOptions<E> = {}) {
+  const {openClass, closedClass, openStyle, closedStyle, onClick} = options
+  const {isOpen, id, toggle} = useDisclosure()
+  const prevOpen = usePrevious(isOpen)
+  useConditionalFocus(target, prevOpen && !isOpen, {includeRoot: true})
+
+  return Object.assign(
+    {
+      'aria-controls': id,
+      'aria-expanded': String(isOpen),
+      className: isOpen ? openClass : closedClass,
+      style: isOpen ? openStyle : closedStyle,
+    } as const,
+    useA11yButton<T, E>(target, (e) => {
+      toggle()
+      onClick?.(e)
+    })
+  )
+}
+
+/**
+ * This component wraps any React element and adds an `onClick` handler
+ * which toggles the open state of the disclosure target.
+ */
+export function Trigger({
   openClass,
   closedClass,
   openStyle,
   closedStyle,
   children,
-}) => {
-  const {isOpen, id, toggle} = useDisclosure()
-  const prevOpen = React.useRef<boolean>(isOpen)
-  const ref = useMergedRef(
-    // @ts-ignore
-    children.ref,
-    useConditionalFocus(prevOpen.current && !isOpen, {includeRoot: true})
-  )
+}: TriggerProps) {
+  const ref = React.useRef<HTMLElement>(null)
+  const childProps = children.props
+  const a11yProps = useTrigger(ref, {
+    openClass: clsx(childProps.className, openClass) || void 0,
+    closedClass: clsx(childProps.className, closedClass) || void 0,
+    openStyle: childProps.style
+      ? Object.assign({}, childProps.style, openStyle)
+      : openStyle,
+    closedStyle: childProps.style
+      ? Object.assign({}, childProps.style, closedStyle)
+      : closedStyle,
+  })
+  const {onClick} = a11yProps
 
-  useLayoutEffect(() => {
-    prevOpen.current = isOpen
-  }, [isOpen])
-
-  return (
-    <Button>
-      {React.cloneElement(children, {
-        'aria-controls': id,
-        'aria-expanded': String(isOpen),
-        className:
-          clsx(children.props.className, isOpen ? openClass : closedClass) ||
-          void 0,
-        style: Object.assign(
-          {},
-          children.props.style,
-          isOpen ? openStyle : closedStyle
-        ),
-        onClick: (e: MouseEvent) => {
-          toggle()
-          children.props.onClick?.(e)
-        },
+  return React.cloneElement(
+    children,
+    Object.assign(a11yProps, {
+      onClick: (e: React.MouseEvent<HTMLElement>) => {
+        onClick(e)
+        childProps.onClick?.(e)
+      },
+      ref: useMergedRef(
         ref,
-      })}
-    </Button>
+        // @ts-expect-error
+        children.ref
+      ),
+    })
   )
 }
 
+function noop() {}
+
+export interface DisclosureContextValue {
+  /**
+   * The open state of the disclosure
+   */
+  isOpen: boolean
+  /**
+   * Opens the disclosure
+   */
+  open: () => void
+  /**
+   * Closes the disclosure
+   */
+  close: () => void
+  /**
+   * Toggles the open state of the disclosure
+   */
+  toggle: () => void
+  /**
+   * A unique ID for the disclosure target
+   */
+  id?: string
+}
+
+export interface DisclosureProps {
+  /**
+   * This creates a controlled disclosure component where the open state of the
+   * disclosure is controlled by this property.
+   */
+  open?: boolean
+  /**
+   * This sets the default open state of the disclosure. By default the disclosure
+   * is closed.
+   * @default false
+   */
+  defaultOpen?: boolean
+  /**
+   * By default this component creates a unique id for you, as it is required
+   * for certain aria attributes. Supplying an id here overrides the auto id feature.
+   */
+  id?: string
+  /**
+   * This callback is invoked any time the `open` state of the disclosure changes.
+   */
+  onChange?: (open: boolean) => void
+  /**
+   * By default this component creates a unique id for you, as it is required for
+   * certain aria attributes. Supplying an id here overrides the auto id feature.
+   */
+  children: React.ReactNode
+}
+
+export interface UseTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
+  /**
+   * Adds this class name to props when the disclosure is open
+   */
+  openClass?: string
+  /**
+   * Adds this class name to props when the disclosure is closed
+   */
+  closedClass?: string
+  /**
+   * Adds this style to props when the disclosure is open
+   */
+  openStyle?: React.CSSProperties
+  /**
+   * Adds this style to props when the disclosure is closed
+   */
+  closedStyle?: React.CSSProperties
+  /**
+   * Adds an onClick handler in addition to the default one that
+   * toggles the disclosure's open state.
+   */
+  onClick?: (e: E) => any
+}
+
+export interface TriggerProps extends Omit<UseTriggerOptions<any>, 'onClick'> {
+  /**
+   * The child is cloned by this component and has aria attributes injected
+   * into its props as well as the events defined above.
+   */
+  children: JSX.Element | React.ReactElement
+}
+
+export interface UseTargetOptions {
+  /**
+   * Adds this class name to props when the disclosure is open
+   */
+  openClass?: string
+  /**
+   * Adds this class name to props when the disclosure is closed
+   */
+  closedClass?: string
+  /**
+   * Adds this style to props when the disclosure is open
+   */
+  openStyle?: React.CSSProperties
+  /**
+   * Adds this style to props when the disclosure is closed
+   */
+  closedStyle?: React.CSSProperties
+  /**
+   * Prevents the `window` from scrolling when the target is
+   * focused after opening.
+   */
+  preventScroll?: boolean
+  /**
+   * When `true`, this closes the target element when the `Escape`
+   * key is pressed.
+   * @default true
+   */
+  closeOnEscape?: boolean
+}
+
+export interface TargetProps extends UseTargetOptions {
+  /**
+   * When `true` this will render the disclosure into a React portal with the
+   * id `#portals`. You can render it into any portal by providing its query
+   * selector here, e.g. `#foobar`, `[data-portal=true]`, or `.foobar`.
+   * @default false
+   */
+  portal?:
+    | boolean
+    | undefined
+    | null
+    | string
+    | Omit<PortalizeProps, 'children'>
+  /**
+   * The child is cloned by this component and has aria attributes injected into its
+   * props as well events.
+   */
+  children: JSX.Element | React.ReactElement
+}
+
+export interface UseCloseButtonOptions<E = React.MouseEvent<any, MouseEvent>> {
+  /**
+   * Adds an onClick handler in addition to the default one that
+   * closes the disclosure.
+   */
+  onClick?: (e: E) => any
+}
+
+export interface CloseButtonProps {
+  /**
+   * The child is cloned by this component and has aria attributes injected into its
+   * props as well events.
+   */
+  children: JSX.Element | React.ReactElement
+}
+
 /* istanbul ignore next */
-if (__DEV__) {
+if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
   Disclosure.displayName = 'Disclosure'
   Target.displayName = 'Target'
   Trigger.displayName = 'Trigger'
-  Close.displayName = 'Close'
+  CloseButton.displayName = 'CloseButton'
 }
