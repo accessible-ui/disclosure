@@ -1,5 +1,8 @@
 import * as React from 'react'
 import type {PortalizeProps} from 'react-portalize'
+/**
+ * This hook provides the current value of the disclosure's context object
+ */
 export declare function useDisclosure(): DisclosureContextValue
 /**
  * This component creates the context for your disclosure target and trigger
