@@ -80,12 +80,12 @@ const Component = () => (
 
 ### Hooks
 
-| Hook                                                | Description                                                                                                                                                                      |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`useDisclosure()`](#usedisclosure)                 | This hook provides the value of the disclosure's [DisclosureContextValue object](#disclosurecontextvalue).                                                                       |
-| [`useTarget()`](#usetargettarget-options)           | A React hook for creating a headless disclosure target to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).  |
-| [`useTrigger()`](#usetriggertarget-options)         | A React hook for creating a headless disclosure trigger to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html). |
-| [`useCloseButton()`](#useclosebuttontarget-options) | A React hook for creating a headless close button to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).       |
+| Hook                                                        | Description                                                                                                                                                                      |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`useDisclosure()`](#usedisclosure)                         | This hook provides the value of the disclosure's [DisclosureContextValue object](#disclosurecontextvalue).                                                                       |
+| [`useA11yTarget()`](#usea11ytargettarget-options)           | A React hook for creating a headless disclosure target to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).  |
+| [`useA11yTrigger()`](#usea11ytriggertarget-options)         | A React hook for creating a headless disclosure trigger to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html). |
+| [`useA11yCloseButton()`](#usea11yclosebuttontarget-options) | A React hook for creating a headless close button to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).       |
 
 ### &lt;Disclosure&gt;
 
@@ -102,7 +102,7 @@ configuration options.
 | id          | `string`                  | `undefined` | No        | By default this component creates a unique id for you, as it is required for certain aria attributes. Supplying an id here overrides the auto id feature. |
 | children    | `React.ReactNode`         | `undefined` | No        | Your disclosure contents and any other children.                                                                                                          |
 
-### useTarget(target, options?)
+### useA11yTarget(target, options?)
 
 A React hook for creating a headless disclosure target to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
 
@@ -111,12 +111,12 @@ A React hook for creating a headless disclosure target to [WAI-ARIA authoring pr
 | Argument | Type                                               | Required? | Description                 |
 | -------- | -------------------------------------------------- | --------- | --------------------------- |
 | target   | <code>React.RefObject&lt;T&gt; \| T \| null</code> | Yes       | A React ref or HTML element |
-| options  | [`UseTargetOptions`](#usetargetoptions)            | No        | Configuration options       |
+| options  | [`UseA11yTargetOptions`](#usea11ytargetoptions)    | No        | Configuration options       |
 
-#### UseTargetOptions
+#### UseA11yTargetOptions
 
 ```ts
-export interface UseTargetOptions {
+export interface UseA11yTargetOptions {
   /**
    * Adds this class name to props when the disclosure is open
    */
@@ -164,11 +164,11 @@ interface A11yProps {
 
 ```jsx harmony
 import * as React from 'react'
-import {useTarget} from '@accessible/disclosure'
+import {useA11yTarget} from '@accessible/disclosure'
 
 const MyTarget = () => {
   const ref = React.useRef(null)
-  const a11yProps = useTarget(ref, {preventScroll: true})
+  const a11yProps = useA11yTarget(ref, {preventScroll: true})
 
   return (
     <div ref={ref} {...a11yProps}>
@@ -212,7 +212,7 @@ This component wraps any React element and turns it into a disclosure target.
 // </div>
 ```
 
-### useTrigger(target, options?)
+### useA11yTrigger(target, options?)
 
 A React hook for creating a headless disclosure trigger to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
 In addition to providing accessibility props to your component, this hook will add events
@@ -224,12 +224,12 @@ target element
 | Argument | Type                                               | Required? | Description                 |
 | -------- | -------------------------------------------------- | --------- | --------------------------- |
 | target   | <code>React.RefObject&lt;T&gt; \| T \| null</code> | Yes       | A React ref or HTML element |
-| options  | [`UseTriggerOptions`](#usetriggeroptions)          | No        | Configuration options       |
+| options  | [`UseA11yTriggerOptions`](#usea11ytriggeroptions)  | No        | Configuration options       |
 
-#### UseTriggerOptions
+#### UseA11yTriggerOptions
 
 ```ts
-export interface UseTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
+export interface UseA11yTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
   /**
    * Adds this class name to props when the disclosure is open
    */
@@ -272,11 +272,14 @@ interface A11yProps<E extends React.MouseEvent<any, MouseEvent>> {
 
 ```jsx harmony
 import * as React from 'react'
-import {useTrigger} from '@accessible/disclosure'
+import {useA11yTrigger} from '@accessible/disclosure'
 
 const MyTrigger = () => {
   const ref = React.useRef(null)
-  const a11yProps = useTrigger(ref, {openClass: 'open', closedClass: 'closed'})
+  const a11yProps = useA11yTrigger(ref, {
+    openClass: 'open',
+    closedClass: 'closed',
+  })
 
   return (
     <button ref={ref} {...a11yProps}>
@@ -315,7 +318,7 @@ of the disclosure target.
 // </button>
 ```
 
-### useCloseButton(target, options?)
+### useA11yCloseButton(target, options?)
 
 A React hook for creating a headless close button to [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/examples/disclosure/disclosure-faq.html).
 In addition to providing accessibility props to your component, this hook will add events
@@ -324,15 +327,17 @@ target element
 
 #### Arguments
 
-| Argument | Type                                               | Required? | Description                 |
-| -------- | -------------------------------------------------- | --------- | --------------------------- |
-| target   | <code>React.RefObject&lt;T&gt; \| T \| null</code> | Yes       | A React ref or HTML element |
-| options  | [`UseCloseButtonOptions`](#useclosebuttonoptions)  | No        | Configuration options       |
+| Argument | Type                                                      | Required? | Description                 |
+| -------- | --------------------------------------------------------- | --------- | --------------------------- |
+| target   | <code>React.RefObject&lt;T&gt; \| T \| null</code>        | Yes       | A React ref or HTML element |
+| options  | [`UseA11yCloseButtonOptions`](#usea11yclosebuttonoptions) | No        | Configuration options       |
 
-#### UseCloseButtonOptions
+#### UseA11yCloseButtonOptions
 
 ```ts
-export interface UseCloseButtonOptions<E = React.MouseEvent<any, MouseEvent>> {
+export interface UseA11yCloseButtonOptions<
+  E = React.MouseEvent<any, MouseEvent>
+> {
   /**
    * Adds an onClick handler in addition to the default one that
    * closes the disclosure.
@@ -358,11 +363,11 @@ interface A11yProps<E extends React.MouseEvent<any, MouseEvent>> {
 
 ```jsx harmony
 import * as React from 'react'
-import {useCloseButton} from '@accessible/disclosure'
+import {useA11yCloseButton} from '@accessible/disclosure'
 
 const MyTrigger = () => {
   const ref = React.useRef(null)
-  const a11yProps = useCloseButton(ref, {
+  const a11yProps = useA11yCloseButton(ref, {
     onClick: () => console.log('Closing!'),
   })
 
