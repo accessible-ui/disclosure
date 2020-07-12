@@ -162,6 +162,7 @@
     "react-portalize": "^2.1.0"
   },
   "peerDependencies": {
-    "react": ">=16.8"
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   }
 }
