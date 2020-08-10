@@ -159,12 +159,9 @@ export function Target({
  * @param target A React ref or HTML element
  * @param options Configuration options
  */
-export function useA11yCloseButton<
-  T extends HTMLElement,
-  E extends React.MouseEvent<T, MouseEvent>
->(
+export function useA11yCloseButton<T extends HTMLElement>(
   target: React.RefObject<T> | T | null,
-  {onClick}: UseA11yCloseButtonOptions<E> = {}
+  {onClick}: UseA11yCloseButtonOptions = {}
 ) {
   const {close, isOpen, id} = useDisclosure()
   return Object.assign(
@@ -173,7 +170,7 @@ export function useA11yCloseButton<
       'aria-expanded': isOpen,
       'aria-label': 'Close',
     } as const,
-    useA11yButton<T, E>(target, (e) => {
+    useA11yButton<T>(target, (e) => {
       close()
       onClick?.(e)
     })
@@ -194,6 +191,7 @@ export function CloseButton({children}: CloseButtonProps) {
   return React.cloneElement(
     children,
     Object.assign(a11yProps, {
+      onClick: undefined,
       'aria-label': childProps.hasOwnProperty('aria-label')
         ? childProps['aria-label']
         : a11yProps['aria-label'],
@@ -215,12 +213,9 @@ export function CloseButton({children}: CloseButtonProps) {
  * @param target A React ref or HTML element
  * @param options Configuration options
  */
-export function useA11yTrigger<
-  T extends HTMLElement,
-  E extends React.MouseEvent<T, MouseEvent>
->(
+export function useA11yTrigger<T extends HTMLElement>(
   target: React.RefObject<T> | T | null,
-  options: UseA11yTriggerOptions<E> = {}
+  options: UseA11yTriggerOptions = {}
 ) {
   const {openClass, closedClass, openStyle, closedStyle, onClick} = options
   const {isOpen, id, toggle} = useDisclosure()
@@ -234,7 +229,7 @@ export function useA11yTrigger<
       className: isOpen ? openClass : closedClass,
       style: isOpen ? openStyle : closedStyle,
     } as const,
-    useA11yButton<T, E>(target, (e) => {
+    useA11yButton<T>(target, (e) => {
       toggle()
       onClick?.(e)
     })
@@ -263,16 +258,13 @@ export function Trigger({
     closedStyle: childProps.style
       ? Object.assign({}, childProps.style, closedStyle)
       : closedStyle,
+    onClick: childProps.onClick,
   })
-  const {onClick} = a11yProps
 
   return React.cloneElement(
     children,
     Object.assign(a11yProps, {
-      onClick: (e: React.MouseEvent<HTMLElement>) => {
-        onClick(e)
-        childProps.onClick?.(e)
-      },
+      onClick: undefined,
       ref: useMergedRef(
         ref,
         // @ts-expect-error
@@ -335,7 +327,7 @@ export interface DisclosureProps {
   children: React.ReactNode
 }
 
-export interface UseA11yTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
+export interface UseA11yTriggerOptions {
   /**
    * Adds this class name to props when the disclosure is open
    */
@@ -356,11 +348,10 @@ export interface UseA11yTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
    * Adds an onClick handler in addition to the default one that
    * toggles the disclosure's open state.
    */
-  onClick?: (e: E) => any
+  onClick?: (e: MouseEvent) => any
 }
 
-export interface TriggerProps
-  extends Omit<UseA11yTriggerOptions<any>, 'onClick'> {
+export interface TriggerProps extends Omit<UseA11yTriggerOptions, 'onClick'> {
   /**
    * The child is cloned by this component and has aria attributes injected
    * into its props as well as the events defined above.
@@ -418,14 +409,12 @@ export interface TargetProps extends UseA11yTargetOptions {
   children: JSX.Element | React.ReactElement
 }
 
-export interface UseA11yCloseButtonOptions<
-  E = React.MouseEvent<any, MouseEvent>
-> {
+export interface UseA11yCloseButtonOptions {
   /**
    * Adds an onClick handler in addition to the default one that
    * closes the disclosure.
    */
-  onClick?: (e: E) => any
+  onClick?: (e: MouseEvent) => any
 }
 
 export interface CloseButtonProps {

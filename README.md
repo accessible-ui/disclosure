@@ -229,7 +229,7 @@ target element
 #### UseA11yTriggerOptions
 
 ```ts
-export interface UseA11yTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
+export interface UseA11yTriggerOptions {
   /**
    * Adds this class name to props when the disclosure is open
    */
@@ -250,21 +250,20 @@ export interface UseA11yTriggerOptions<E = React.MouseEvent<any, MouseEvent>> {
    * Adds an onClick handler in addition to the default one that
    * toggles the disclosure's open state.
    */
-  onClick?: (e: E) => any
+  onClick?: (e: MouseEvent) => any
 }
 ```
 
 #### Returns
 
 ```ts
-interface A11yProps<E extends React.MouseEvent<any, MouseEvent>> {
+interface A11yProps {
   readonly 'aria-controls': string | undefined
   readonly 'aria-expanded': boolean
   readonly role: 'button'
   readonly tabIndex: 0
   readonly className: string | undefined
   readonly style: React.CSSProperties | undefined
-  readonly onClick: (event: E) => void
 }
 ```
 
@@ -335,27 +334,24 @@ target element
 #### UseA11yCloseButtonOptions
 
 ```ts
-export interface UseA11yCloseButtonOptions<
-  E = React.MouseEvent<any, MouseEvent>
-> {
+export interface UseA11yCloseButtonOptions {
   /**
    * Adds an onClick handler in addition to the default one that
    * closes the disclosure.
    */
-  onClick?: (e: E) => any
+  onClick?: (e: MouseEvent) => any
 }
 ```
 
 #### Returns
 
 ```ts
-interface A11yProps<E extends React.MouseEvent<any, MouseEvent>> {
+interface A11yProps {
   readonly 'aria-controls': string | undefined
   readonly 'aria-expanded': boolean
   readonly 'aria-label': 'Close'
   readonly role: 'button'
   readonly tabIndex: 0
-  readonly onClick: (event: E) => void
 }
 ```
 

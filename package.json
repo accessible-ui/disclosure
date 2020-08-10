@@ -151,7 +151,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@accessible/button": "^2.0.1",
+    "@accessible/button": "^2.0.2",
     "@accessible/use-conditional-focus": "^3.0.0",
     "@accessible/use-id": "^1.1.1",
     "@accessible/use-key": "^1.0.2",
